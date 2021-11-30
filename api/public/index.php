@@ -17,6 +17,12 @@ $app = AppFactory::create();
 $routeCollector = $app->getRouteCollector();
 $routeCollector->setDefaultInvocationStrategy(new RequestResponseArgs());
 
+$app->get('/', function ($request, $response) {
+    $response->getBody()->write("<span>hello there</span>");
+    
+    return $response;
+});
+
 $app->get('/hello/{name}', function ($request, $response, $name) {
     $response->getBody()->write("<span>$name</span>");
     
