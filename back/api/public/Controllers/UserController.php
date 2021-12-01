@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller;
+namespace Controllers;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -11,6 +11,7 @@ class UserController
     {
         //Créer un user sur la BD et les passés dans le body
         //TODO
+        $response->getBody()->write("<span>POST User</span>");
         return $response;
     }
 
@@ -18,6 +19,7 @@ class UserController
     {
         //Récuperer tout les users de la BD et les passés dans le body
         //TODO
+        $response->getBody()->write("<span>GET Users</span>");
         return $response;
     }
 
@@ -25,6 +27,7 @@ class UserController
     {
         //Récuperer un user de la BD et le passé dans le body
         //TODO
+        $response->getBody()->write("<span>GET User $id</span>");
         return $response;
     }
 
@@ -32,6 +35,7 @@ class UserController
     {
         //Editer un user de la BD et le passé dans le body
         //TODO
+        $response->getBody()->write("<span>PUT User $id</span>");
         return $response;
     }
 
@@ -44,6 +48,7 @@ class UserController
         //$response->execute();
         //$todos = $response->fetchAll();
         //return $this->response->withJson($todos);  
+        $response->getBody()->write("<span>DELETE User $id</span>");
         return $response;
     }
 }

@@ -1,5 +1,8 @@
-# jailadal
+# Jailadal™
+
 ## Starting API:
-### cd api
+### php -S localhost:8000 -t back/api/public
+
+## Install back-end dependencies and autoloader:
+### cd back
 ### composer install
-### php -S localhost:8000 -t public

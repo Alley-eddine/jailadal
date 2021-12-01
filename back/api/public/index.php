@@ -1,74 +1,15 @@
 <?php
 
-use Controller\AuthenticationController;
-use Controller\UserController;
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Factory\AppFactory;
-use Slim\Factory\ServerRequestCreatorFactory;
-use Slim\Handlers\Strategies\RequestResponseArgs;
-use Slim\Routing\RouteCollectorProxy as Group;
+use PublicApi\Server;
+use Routers\PublicRouter;
 
-use ServerApp\Server;
+require '../../vendor/autoload.php';
 
+$server = new Server();
+$server->start();
 
-require '../vendor/autoload.php';
-
-// Create Server API
-
-// $server = new Server();
-
-// $server->start();
-
-
-// Setup API
-
-// ______________________________________________________________________________
-// ROUTER
-// ------
-
-// Authentication
-// $app->post('/authentication', [AuthenticationController::class, 'authenticate']);
-
-// User
-$app->group('/user', function (Group $userGroup): void {
-    $userGroup->post('', [UserController::class, 'createUser']);
-    $userGroup->get('', [UserController::class, 'getAllUsers']);
-    $userGroup->get('/{id}', [UserController::class, 'getUser']);
-    $userGroup->put('/{id}', [UserController::class, 'editUser']);
-    $userGroup->delete('/{id}', [UserController::class, 'deleteUser']);
-});
-
-// Item
-$app->group('/item', function (Group $itemGroup): void {
-    $itemGroup->post('', [UserController::class, 'createItem']);
-    $itemGroup->get('', [UserController::class, 'getAllItems']);
-    $itemGroup->get('/{id}', [UserController::class, 'getItem']);
-    $itemGroup->put('/{id}', [UserController::class, 'editItem']);
-    $itemGroup->delete('/{id}', [UserController::class, 'deleteItem']);
-});
-
-// Order
-$app->group('/item', function (Group $orderGroup): void {
-    $orderGroup->post('', [UserController::class, 'createOrder']);
-    $orderGroup->get('', [UserController::class, 'getAllOrders']);
-    $orderGroup->get('/{id}', [UserController::class, 'getOrder']);
-    $orderGroup->put('/{id}', [UserController::class, 'editOrder']);
-    $orderGroup->delete('/{id}', [UserController::class, 'deleteOrder']);
-});
-
-// Table
-$app->group('/item', function (Group $tableGroup): void {
-    $tableGroup->post('', [UserController::class, 'createTable']);
-    $tableGroup->get('', [UserController::class, 'getAllTables']);
-    $tableGroup->get('/{id}', [UserController::class, 'getTable']);
-    $tableGroup->put('/{id}', [UserController::class, 'editTable']);
-    $tableGroup->delete('/{id}', [UserController::class, 'deleteTable']);
-});
-
-// ----------
-// END ROUTER
-// ______________________________________________________________________________
+$router = new PublicRouter($server->getPublicApi());
+$router->start();
 
 // ______________________________________________________________________________
 // EXAMPLES
@@ -100,7 +41,7 @@ $app->group('/item', function (Group $tableGroup): void {
 //             echo '<br>';
 //         }
 //         echo '<br>';
-    
+
 //         // Accéder aux valeurs d'un header sous forme d'une string
 //         $specificHeaderLine = $request->getHeaderLine($host);
 //         echo "<span>$specificHeaderLine</span><br><br>";
@@ -110,17 +51,17 @@ $app->group('/item', function (Group $tableGroup): void {
 //     $body = $request->getBody();
 
 //     $response->getBody()->write("<span>This is a GET method response test.</span><br><br>");
-    
+
 //     return $response;
 // });
 
 // // POST
 // $app->post('/test', function (Request $request, Response $response): Response {
 //     $data = $request->getParsedBody();
-    
+
 //     $html = var_export($data, true);
 //     $response->getBody()->write($html.'<br><br>');
-    
+
 //     return $response;
 // });
 
@@ -171,7 +112,7 @@ $app->group('/item', function (Group $tableGroup): void {
 
 ?>
 
-<!-- <!DOCTYPE html>
+<!--!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -182,7 +123,7 @@ $app->group('/item', function (Group $tableGroup): void {
 </head>
 
 <body>
-    // POST test
+    <!- - POST test - ->
     <br><br>
     <form action="/test" method="POST">
         <input type="text" name="test1" placeholder="test1">
@@ -191,11 +132,11 @@ $app->group('/item', function (Group $tableGroup): void {
         <button type="submit">Tester le POST</button>
     </form>
 
-    // Authentication 
+    <!- - Authentication - ->
     <form action="/authentication" method="POST">
         <input type="text" name="login" placeholder="login">
         <input type="text" name="password" placeholder="password">
         <button type="submit">Authenticate</button>
     </form>
 </body>
-</html> -->
+</html-->

@@ -1,0 +1,17 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Abstracts\\": "api/public/Abstracts/",
+            "Controllers\\": "api/public/Controllers/",
+            "Models\\": "entities/Models/",
+            "PublicApi\\": "api/public/",
+            "Routers\\": "api/public/Routers/",
+            "Services\\": "entities/Services/"
+
+        }
+    },
+    "require": {
+        "slim/psr7": "^1.5",
+        "slim/slim": "^4.9"
+    }
+}
