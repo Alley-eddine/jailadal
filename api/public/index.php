@@ -1,19 +1,20 @@
 <?php
+use Controller\AuthenticationController;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;
 use Slim\Handlers\Strategies\RequestResponseArgs;
 use Slim\Routing\RouteCollectorProxy as Group;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
-use Controller\AuthenticationController;
 
 require '../vendor/autoload.php';
 
-// Créer et setup l'API
+// Create API
+$app = AppFactory::create();
+
+// Setup API
 AppFactory::setSlimHttpDecoratorsAutomaticDetection(false);
 ServerRequestCreatorFactory::setSlimHttpDecoratorsAutomaticDetection(false);
-
-$app = AppFactory::create();
 
 $routeCollector = $app->getRouteCollector();
 $routeCollector->setDefaultInvocationStrategy(new RequestResponseArgs());
@@ -21,7 +22,36 @@ $routeCollector->setDefaultInvocationStrategy(new RequestResponseArgs());
 $app->addBodyParsingMiddleware();
 $app->addRoutingMiddleware();
 
-//------------- Le router ---------------
+// ______________________________________________________________________________
+// ROUTER
+// ------
+
+// Authentication
+$app->post('/authentication', [AuthenticationController::class, 'authenticate']);
+
+// User
+// TODO
+
+// Admin
+// TODO
+
+// Item
+// TODO
+
+// Order
+// TODO
+
+// Table
+// TODO
+
+// ----------
+// END ROUTER
+// ______________________________________________________________________________
+
+// ______________________________________________________________________________
+// EXAMPLES
+// --------
+
 // Exemple GET
 $app->get('/test', function (Request $request, Response $response): Response {
     // HTTP method (GET, POST, PUT, DELETE, ...)
@@ -110,8 +140,9 @@ $app->group('/hello', function (Group $helloGroup): void {
     });
 });
 
-// Authentication
-$app->post('/authentication', [AuthenticationController::class, 'authenticate']);
+// ------------
+// END EXAMPLES
+// ______________________________________________________________________________
 
 // Run API
 $app->run();
