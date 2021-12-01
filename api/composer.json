@@ -1,7 +1,10 @@
 {
     "autoload": {
         "psr-4": {
-            "Controller\\": "public/Controller/"
+            "Controller\\": "public/Controller/",
+            "ServerApp\\": "public/",
+            "Abstract\\": "public/Abstract/"
+
         }
     },
     "require": {
