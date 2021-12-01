@@ -35,27 +35,45 @@ $app->post('/authentication', [AuthenticationController::class, 'authenticate'])
 $app->group('/user', function (Group $userGroup): void {
 
     $userGroup->post('', [UserController::class, 'createUser']);
-
     $userGroup->get('', [UserController::class, 'getAllUsers']);
-
     $userGroup->get('/{id}', [UserController::class, 'getUser']);
-
     $userGroup->put('/{id}', [UserController::class, 'editUser']);
-    
     $userGroup->delete('/{id}', [UserController::class, 'deleteUser']);
 });
 
-// Admin
-// TODO
+
 
 // Item
-// TODO
+$app->group('/item', function (Group $itemGroup): void {
+
+    $itemGroup->post('', [UserController::class, 'createItem']);
+    $itemGroup->get('', [UserController::class, 'getAllItems']);
+    $itemGroup->get('/{id}', [UserController::class, 'getItem']);
+    $itemGroup->put('/{id}', [UserController::class, 'editItem']);
+    $itemGroup->delete('/{id}', [UserController::class, 'deleteItem']);
+
+});
 
 // Order
-// TODO
+$app->group('/item', function (Group $orderGroup): void {
+
+    $orderGroup->post('', [UserController::class, 'createOrder']);
+    $orderGroup->get('', [UserController::class, 'getAllOrders']);
+    $orderGroup->get('/{id}', [UserController::class, 'getOrder']);
+    $orderGroup->put('/{id}', [UserController::class, 'editOrder']);
+    $orderGroup->delete('/{id}', [UserController::class, 'deleteOrder']);
+
+});
 
 // Table
-// TODO
+$app->group('/item', function (Group $tableGroup): void {
+
+    $tableGroup->post('', [UserController::class, 'createTable']);
+    $tableGroup->get('', [UserController::class, 'getAllTables']);
+    $tableGroup->get('/{id}', [UserController::class, 'getTable']);
+    $tableGroup->put('/{id}', [UserController::class, 'editTable']);
+    $tableGroup->delete('/{id}', [UserController::class, 'deleteTable']);
+});
 
 // ----------
 // END ROUTER
