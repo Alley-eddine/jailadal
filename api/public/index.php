@@ -1,5 +1,6 @@
 <?php
 use Controller\AuthenticationController;
+use Controller\UserController;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
@@ -31,7 +32,18 @@ $app->addErrorMiddleware(true, true, true);
 $app->post('/authentication', [AuthenticationController::class, 'authenticate']);
 
 // User
-// TODO
+$app->group('/user', function (Group $userGroup): void {
+
+    $userGroup->post('', [UserController::class, 'createUser']);
+
+    $userGroup->get('', [UserController::class, 'getAllUsers']);
+
+    $userGroup->get('/{id}', [UserController::class, 'getUser']);
+
+    $userGroup->put('/{id}', [UserController::class, 'editUser']);
+    
+    $userGroup->delete('/{id}', [UserController::class, 'deleteUser']);
+});
 
 // Admin
 // TODO
