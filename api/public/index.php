@@ -21,6 +21,7 @@ $routeCollector->setDefaultInvocationStrategy(new RequestResponseArgs());
 
 $app->addBodyParsingMiddleware();
 $app->addRoutingMiddleware();
+$app->addErrorMiddleware(true, true, true);
 
 // ______________________________________________________________________________
 // ROUTER
@@ -159,6 +160,7 @@ $app->run();
 </head>
 <body>
     <!-- POST test -->
+    <br><br>
     <form action="/test" method="POST">
         <input type="text" name="test1" placeholder="test1">
         <input type="text" name="test2" placeholder="test2">
