@@ -14,6 +14,8 @@ AppFactory::setSlimHttpDecoratorsAutomaticDetection(false);
 ServerRequestCreatorFactory::setSlimHttpDecoratorsAutomaticDetection(false);
 
 $app = AppFactory::create();
+$callableResolver = $app->getCallableResolver();
+$responseFactory = $app->getResponseFactory();
 
 $routeCollector = $app->getRouteCollector();
 $routeCollector->setDefaultInvocationStrategy(new RequestResponseArgs());
