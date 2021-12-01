@@ -1,4 +1,5 @@
 <?php
+
 use Controller\AuthenticationController;
 use Controller\UserController;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -33,7 +34,6 @@ $app->post('/authentication', [AuthenticationController::class, 'authenticate'])
 
 // User
 $app->group('/user', function (Group $userGroup): void {
-
     $userGroup->post('', [UserController::class, 'createUser']);
     $userGroup->get('', [UserController::class, 'getAllUsers']);
     $userGroup->get('/{id}', [UserController::class, 'getUser']);
@@ -41,33 +41,26 @@ $app->group('/user', function (Group $userGroup): void {
     $userGroup->delete('/{id}', [UserController::class, 'deleteUser']);
 });
 
-
-
 // Item
 $app->group('/item', function (Group $itemGroup): void {
-
     $itemGroup->post('', [UserController::class, 'createItem']);
     $itemGroup->get('', [UserController::class, 'getAllItems']);
     $itemGroup->get('/{id}', [UserController::class, 'getItem']);
     $itemGroup->put('/{id}', [UserController::class, 'editItem']);
     $itemGroup->delete('/{id}', [UserController::class, 'deleteItem']);
-
 });
 
 // Order
 $app->group('/item', function (Group $orderGroup): void {
-
     $orderGroup->post('', [UserController::class, 'createOrder']);
     $orderGroup->get('', [UserController::class, 'getAllOrders']);
     $orderGroup->get('/{id}', [UserController::class, 'getOrder']);
     $orderGroup->put('/{id}', [UserController::class, 'editOrder']);
     $orderGroup->delete('/{id}', [UserController::class, 'deleteOrder']);
-
 });
 
 // Table
 $app->group('/item', function (Group $tableGroup): void {
-
     $tableGroup->post('', [UserController::class, 'createTable']);
     $tableGroup->get('', [UserController::class, 'getAllTables']);
     $tableGroup->get('/{id}', [UserController::class, 'getTable']);
@@ -109,7 +102,7 @@ $app->get('/test', function (Request $request, Response $response): Response {
             echo '<br>';
         }
         echo '<br>';
-    
+
         // Accéder aux valeurs d'un header sous forme d'une string
         $specificHeaderLine = $request->getHeaderLine($host);
         echo "<span>$specificHeaderLine</span><br><br>";
@@ -119,17 +112,17 @@ $app->get('/test', function (Request $request, Response $response): Response {
     $body = $request->getBody();
 
     $response->getBody()->write("<span>This is a GET method response test.</span><br><br>");
-    
+
     return $response;
 });
 
 // POST
 $app->post('/test', function (Request $request, Response $response): Response {
     $data = $request->getParsedBody();
-    
+
     $html = var_export($data, true);
-    $response->getBody()->write($html.'<br><br>');
-    
+    $response->getBody()->write($html . '<br><br>');
+
     return $response;
 });
 
@@ -182,12 +175,14 @@ $app->run();
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test</title>
 </head>
+
 <body>
     <!-- POST test -->
     <br><br>
@@ -205,4 +200,5 @@ $app->run();
         <button type="submit">Authenticate</button>
     </form>
 </body>
+
 </html>
