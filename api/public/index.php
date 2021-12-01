@@ -14,17 +14,12 @@ AppFactory::setSlimHttpDecoratorsAutomaticDetection(false);
 ServerRequestCreatorFactory::setSlimHttpDecoratorsAutomaticDetection(false);
 
 $app = AppFactory::create();
-$callableResolver = $app->getCallableResolver();
-$responseFactory = $app->getResponseFactory();
 
 $routeCollector = $app->getRouteCollector();
 $routeCollector->setDefaultInvocationStrategy(new RequestResponseArgs());
 
 $app->addBodyParsingMiddleware();
 $app->addRoutingMiddleware();
-
-$errorMiddleware = $app->addErrorMiddleware(true, false, false);
-$errorMiddleware->setDefaultErrorHandler($errorHandler);
 
 //------------- Le router ---------------
 // Exemple GET
