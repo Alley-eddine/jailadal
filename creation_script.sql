@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS jailadal;
+USE jailadal;
+
 #------------------------------------------------------------
 #        Script MySQL.
 #------------------------------------------------------------
@@ -7,7 +10,7 @@
 # Table: Categories
 #------------------------------------------------------------
 
-CREATE TABLE Categories(
+CREATE TABLE `Categories`(
         cat_id   Varchar (36) NOT NULL ,
         cat_name Varchar (100) NOT NULL
 	,CONSTRAINT Categories_PK PRIMARY KEY (cat_id)
@@ -18,7 +21,7 @@ CREATE TABLE Categories(
 # Table: Items
 #------------------------------------------------------------
 
-CREATE TABLE Items(
+CREATE TABLE `Items`(
         itm_id          Varchar (36) NOT NULL ,
         itm_name        Varchar (100) NOT NULL ,
         itm_description Varchar (255) NOT NULL ,
@@ -38,7 +41,7 @@ CREATE TABLE Items(
 # Table: User
 #------------------------------------------------------------
 
-CREATE TABLE User(
+CREATE TABLE `User`(
         usr_id          Varchar (36) NOT NULL ,
         usr_lastname    Varchar (50) NOT NULL ,
         usr_firstname   Varchar (100) NOT NULL ,
@@ -46,7 +49,7 @@ CREATE TABLE User(
         usr_phone       Varchar (50) NOT NULL ,
         usr_password    Varchar (100) NOT NULL ,
         usr_picture_url Varchar (100) NOT NULL ,
-        usr_privilege   Bool NOT NULL
+        usr_privilege   Boolean NOT NULL
 	,CONSTRAINT User_PK PRIMARY KEY (usr_id)
 )ENGINE=InnoDB;
 
@@ -55,7 +58,7 @@ CREATE TABLE User(
 # Table: Cart
 #------------------------------------------------------------
 
-CREATE TABLE Cart(
+CREATE TABLE `Cart`(
         crt_id Varchar (36) NOT NULL ,
         usr_id Varchar (36) NOT NULL
 	,CONSTRAINT Cart_PK PRIMARY KEY (crt_id)
@@ -69,7 +72,7 @@ CREATE TABLE Cart(
 # Table: Order
 #------------------------------------------------------------
 
-CREATE TABLE Order(
+CREATE TABLE `Order`(
         odr_id     Varchar (36) NOT NULL ,
         odr_status Int NOT NULL ,
         odr_date   Date NOT NULL ,
@@ -85,9 +88,9 @@ CREATE TABLE Order(
 # Table: Table
 #------------------------------------------------------------
 
-CREATE TABLE Table(
+CREATE TABLE `Table`(
         tbl_id           Varchar (36) NOT NULL ,
-        tbl_availability Bool NOT NULL ,
+        tbl_availability Boolean NOT NULL ,
         usr_id           Varchar (36)
 	,CONSTRAINT Table_PK PRIMARY KEY (tbl_id)
 
@@ -99,7 +102,7 @@ CREATE TABLE Table(
 # Table: contenir
 #------------------------------------------------------------
 
-CREATE TABLE contenir(
+CREATE TABLE `contenir`(
         crt_id Varchar (36) NOT NULL ,
         itm_id Varchar (36) NOT NULL
 	,CONSTRAINT contenir_PK PRIMARY KEY (crt_id,itm_id)
