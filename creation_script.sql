@@ -1,10 +1,9 @@
-CREATE DATABASE IF NOT EXISTS jailadal;
-USE jailadal;
-
 #------------------------------------------------------------
 #        Script MySQL.
 #------------------------------------------------------------
 
+CREATE DATABASE IF NOT EXISTS jailadal CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE jailadal;
 
 #------------------------------------------------------------
 # Table: Categories
@@ -22,15 +21,14 @@ CREATE TABLE `Categories`(
 #------------------------------------------------------------
 
 CREATE TABLE `Items`(
-        itm_id          Varchar (36) NOT NULL ,
-        itm_name        Varchar (100) NOT NULL ,
-        itm_description Varchar (255) NOT NULL ,
-        itm_price       Float NOT NULL ,
-        itm_image       Varchar (255) NOT NULL ,
-        itm_qty         Int NOT NULL ,
-        itm_category    Int NOT NULL ,
-        itm_sales       BigInt NOT NULL ,
-        cat_id          Varchar (36) NOT NULL
+        itm_id           Varchar (36) NOT NULL ,
+        itm_name         Varchar (100) NOT NULL ,
+        itm_description  Varchar (255) NOT NULL ,
+        itm_price        Float NOT NULL ,
+        itm_image        Varchar (255) NOT NULL ,
+        itm_qty          Int NOT NULL ,
+        itm_original_qty BigInt NOT NULL ,
+        cat_id           Varchar (36) NOT NULL
 	,CONSTRAINT Items_PK PRIMARY KEY (itm_id)
 
 	,CONSTRAINT Items_Categories_FK FOREIGN KEY (cat_id) REFERENCES Categories(cat_id)
@@ -99,15 +97,15 @@ CREATE TABLE `Table`(
 
 
 #------------------------------------------------------------
-# Table: contenir
+# Table: Contains
 #------------------------------------------------------------
 
-CREATE TABLE `contenir`(
+CREATE TABLE `Contains`(
         crt_id Varchar (36) NOT NULL ,
         itm_id Varchar (36) NOT NULL
-	,CONSTRAINT contenir_PK PRIMARY KEY (crt_id,itm_id)
+	,CONSTRAINT contains_PK PRIMARY KEY (crt_id,itm_id)
 
-	,CONSTRAINT contenir_Cart_FK FOREIGN KEY (crt_id) REFERENCES Cart(crt_id)
-	,CONSTRAINT contenir_Items0_FK FOREIGN KEY (itm_id) REFERENCES Items(itm_id)
+	,CONSTRAINT contains_Cart_FK FOREIGN KEY (crt_id) REFERENCES Cart(crt_id)
+	,CONSTRAINT contains_Items0_FK FOREIGN KEY (itm_id) REFERENCES Items(itm_id)
 )ENGINE=InnoDB;
 
