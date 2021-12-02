@@ -22,7 +22,7 @@ class Server extends ServerImplementation
         $this->router = new Router($this->app);
 
         return $this;
-    }
+    } 
 
     public function routing()
     {

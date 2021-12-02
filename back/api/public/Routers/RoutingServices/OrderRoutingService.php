@@ -4,7 +4,7 @@ namespace Routers;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Services\OrderService;
+use Entities\Services\OrderService;
 use Slim\Routing\RouteCollectorProxy as Group;
 
 class OrderRoutingService
@@ -16,22 +16,35 @@ class OrderRoutingService
         $this->service = new OrderService;
     }
 
-    public function listenRequests(Group $group): void
+    public function httpMethodsOrderService(Group $group): void
     {
-        $group->post('', function (Request $request, Response $response): Response {
-            return $this->service->createOrder($request, $response);
-        });
+        $this->httpGetMethod($group);
+        $this->httpGetMethodWithUrlParams($group);
+        $this->httpPostMethod($group);
+        $this->httpDeleteMethod($group);
+    }
+
+    private function httpGetMethod(Group $group){
         $group->get('', function (Request $request, Response $response): Response {
-            return $this->service->getAllOrders($request, $response);
+            return $this->service->getOrders($request, $response);
         });
+    }
+
+    private function httpGetMethodWithUrlParams(Group $group){
         $group->get('/{$id}', function (Request $request, Response $response, string $id): Response {
-            return $this->service->getOrder($request, $response, $id);
+            return $this->service->editOrderById($request, $response, $id);
         });
-        $group->get('/{$id}', function (Request $request, Response $response, string $id): Response {
-            return $this->service->editOrder($request, $response, $id);
+    }
+
+    private function httpPostMethod(Group $group){
+        $group->post('', function (Request $request, Response $response): Response {
+            return $this->services->createOrder($request, $response);
         });
-        $group->get('/{$id}', function (Request $request, Response $response, string $id): Response {
-            return $this->service->deleteOrder($request, $response, $id);
+    }
+
+    private function httpDeleteMethod(Group $group){
+        $group->delete('/{$id}', function (Request $request, Response $response, string $id): Response {
+            return $this->service->deleteOrderById($request, $response, $id);
         });
     }
 }

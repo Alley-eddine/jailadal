@@ -1,6 +1,6 @@
 <?php
 
-namespace Services;
+namespace Entities\Services;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -14,7 +14,7 @@ class ItemService
         return $response;
     }
     
-    public function getAllItems(Request $request, Response $response): Response
+    public function getItems(Request $request, Response $response): Response
     {
         // TODO:
         // Instancier un ItemModel.

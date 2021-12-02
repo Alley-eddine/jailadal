@@ -4,7 +4,7 @@ namespace Routers;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Services\CartService;
+use Entities\Services\CartService;
 use Slim\Routing\RouteCollectorProxy as Group;
 
 class CartRoutingService
@@ -16,22 +16,35 @@ class CartRoutingService
         $this->service = new CartService;
     }
 
-    public function listenRequests(Group $group): void
+    public function httpMethodsCartService(Group $group): void
     {
-        $group->post('', function (Request $request, Response $response): Response {
-            return $this->service->createCart($request, $response);
-        });
+        $this->httpGetMethod($group);
+        $this->httpGetMethodWithUrlParams($group);
+        $this->httpPostMethod($group);
+        $this->httpDeleteMethod($group);
+    }
+
+    private function httpGetMethod(Group $group){
         $group->get('', function (Request $request, Response $response): Response {
-            return $this->service->getAllCarts($request, $response);
+            return $this->service->getCarts($request, $response);
         });
+    }
+
+    private function httpGetMethodWithUrlParams(Group $group){
         $group->get('/{$id}', function (Request $request, Response $response, string $id): Response {
-            return $this->service->getCart($request, $response, $id);
+            return $this->service->editCartById($request, $response, $id);
         });
-        $group->get('/{$id}', function (Request $request, Response $response, string $id): Response {
-            return $this->service->editCart($request, $response, $id);
+    }
+
+    private function httpPostMethod(Group $group){
+        $group->post('', function (Request $request, Response $response): Response {
+            return $this->services->createCart($request, $response);
         });
-        $group->get('/{$id}', function (Request $request, Response $response, string $id): Response {
-            return $this->service->deleteCart($request, $response, $id);
+    }
+
+    private function httpDeleteMethod(Group $group){
+        $group->delete('/{$id}', function (Request $request, Response $response, string $id): Response {
+            return $this->service->deleteCartById($request, $response, $id);
         });
     }
 }

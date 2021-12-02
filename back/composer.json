@@ -8,8 +8,9 @@
             "Entities\\": "app/Entities/",
             "Middlewares\\": "api/public/Middlewares/",
             "Models\\": "app/Models/",
-            "Routers\\":"api/public/Routers/",
-            "Services\\": "app/Services/"
+            "Services\\": "app/Services/",
+            "Routers\\": "api/public/Routers/",
+            "Routers\\RoutingServices\\":"api/public/Routers/RoutingServices/"
         }
     },
     "require": {
