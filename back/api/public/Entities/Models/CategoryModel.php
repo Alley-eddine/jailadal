@@ -5,7 +5,7 @@ namespace Entities\Models;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-class CategorieModel
+class CategoryModel
 {
     private string $id;
     private string $name;

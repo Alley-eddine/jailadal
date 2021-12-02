@@ -60,11 +60,11 @@ class ItemModel
     private int $quantity;
     public function getQuantity(): int
     {
-        return $this->qty;
+        return $this->quantity;
     }
-    public function setQuantity($qty): void
+    public function setQuantity($quantity): void
     {
-        $this->qty = $qty;
+        $this->quantity = $quantity;
     }
 
     private int $originalQuantity;
