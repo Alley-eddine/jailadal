@@ -10,9 +10,7 @@ abstract class ServerImplementation
 {
     protected App $app;
 
-    protected function __construct()
-    {
-    }
+    protected function __construct(){}
 
     protected function initApp(): self
     {
@@ -33,7 +31,7 @@ abstract class ServerImplementation
     {
         $this->app->addRoutingMiddleware();
         $this->app->addBodyParsingMiddleware();
-
+        $this->app->addErrorMiddleware(true, true, true);
         return $this;
     }
 }

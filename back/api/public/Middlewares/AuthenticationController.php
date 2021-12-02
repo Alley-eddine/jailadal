@@ -1,11 +1,11 @@
 <?php
 
-namespace Controllers;
+namespace Middlewares;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-class AuthenticationController
+class AuthenticationMiddleware
 {
     public static function authenticate(Request $request, Response $response): Response
     {

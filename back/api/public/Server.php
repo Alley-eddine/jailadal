@@ -1,33 +1,34 @@
 <?php
 
-namespace PublicApi;
+namespace Server;
 
 use Abstracts\ServerImplementation;
-use Slim\App;
-
+use Router\Router;
 class Server extends ServerImplementation
 {
-    public function getPublicApi(): App
-    {
-        return $this->app;
-    }
+    private Router $router;
 
     public function __construct()
     {
         parent::__construct();
     }
-
+    
     private function initBaseServer(): self
     {
         parent::addDecorator(false);
         parent::initApp();
         parent::baseMiddleware();
-
+        $this->router = new Router($this->app);
+        // print_r($this->app);
         return $this;
     }
-
+    public function routing(){
+        $this->router->httpGetMethodRoutingItemService();
+    }
     public function start()
     {
-        $this->initBaseServer();
+        $this->initBaseServer()->routing();
+        // $this->app->get('/items',[Router::class, 'httpGetMethodRoutingItemService']);
+        $this->app->run();
     }
 }

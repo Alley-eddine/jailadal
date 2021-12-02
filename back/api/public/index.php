@@ -1,15 +1,17 @@
 <?php
 
-use PublicApi\Server;
-use Routers\PublicRouter;
+use Middlewares\PublicDatasMiddleware;
+use Server\Server;
 
 require '../../vendor/autoload.php';
 
 $server = new Server();
 $server->start();
 
-$router = new PublicRouter($server->getPublicApi());
-$router->start();
+
+
+// $router = new PublicDatasMiddleware($server->getPublicApi());
+// $router->start();
 
 // ______________________________________________________________________________
 // EXAMPLES
