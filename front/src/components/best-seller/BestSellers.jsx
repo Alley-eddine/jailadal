@@ -1,8 +1,8 @@
 import React from 'react';
-import Menu from '../menu/Menu';
-import './items.scss';
+import BestSellersMenu from './BestSellersMenu'
+import './BestSellers.scss';
 
-class Items extends React.Component {
+class BestSellers extends React.Component {
     constructor() {
         super();
 
@@ -50,8 +50,10 @@ class Items extends React.Component {
 
     render() {
         return (
+            <div>
+                <h1 className={"MenuTitle"}>BEST SELLERS</h1>
             <div className={'directory-menu'}>
-                {this.state.sections.map(({
+                {this.state.sections.slice(0,3).map(({
                                         itm_id,
                                         itm_name,
                                         itm_description,
@@ -60,7 +62,7 @@ class Items extends React.Component {
                                         itm_price,
                                         itm_original_qty
                                     }) => (
-                    <Menu
+                    <BestSellersMenu
                         itm_id={itm_id}
                         itm_name={itm_name}
                         itm_description={itm_description}
@@ -71,8 +73,9 @@ class Items extends React.Component {
                     />
                 ))}
             </div>
+            </div>
         );
     }
 }
 
-export default Items;
+export default BestSellers;

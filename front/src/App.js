@@ -3,18 +3,24 @@ import './App.css';
 import Header from './components/Header'
 import Menu from './components/menu/Menu'
 import Items from './components/items/Items'
+import Register from './components/register/Register'
+import BestSellers from './components/best-seller/BestSellers'
+
 
 
 function App() {
   return (
     <div className="App">
-        <div>
+        <div className="Header">
      <Header />
         </div>
+        <div><BestSellers /></div>
         <div><Items /></div>
+        <Register />
 
     </div>
   );
 }
+
 
 export default App;
