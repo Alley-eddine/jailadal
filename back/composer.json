@@ -2,6 +2,8 @@
     "autoload": {
         "psr-4": {
             "Abstracts\\": "api/public/Abstracts/",
+            "Common\\": "api/public/Common/",
+            "Config\\": "api/public/Config/",
             "Entities\\Models\\": "api/public/Entities/Models/",
             "Entities\\Services\\": "api/public/Entities/Services/",
             "Middlewares\\": "api/public/Middlewares/",
