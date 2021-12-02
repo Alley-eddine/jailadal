@@ -3,11 +3,11 @@
 namespace Entities\Models;
 
 use Common\Database;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
 
 class UserModel
 {
+    private Database $db;
+
     private string $id;
     public function getId(): string
     {
@@ -89,50 +89,18 @@ class UserModel
         $this->privilege = $privilege;
     }
 
-    public function __construct($id, $lastname, $firstname, $mail, $phone, $password, $picture_url, $privilege)
+    public function __construct()
     {
-        $this->id = $id;
-        $this->lastname = $lastname;
-        $this->firstname = $firstname;
-        $this->mail = $mail;
-        $this->phone = $phone;
-        $this->password = $password;
-        $this->picture_url = $picture_url;
-        $this->privilege = $privilege;
+        $this->db = new Database;
     }
 
-    public static function createUser()
+    public function fetch(): self
     {
-        //Créer un user sur la BD et les passés dans le body
-        //TODO
+        return $this;
     }
 
-    public static function getAllUsers()
+    public function persist(): void
     {
-        //Récuperer tout les users de la BD et les passés dans le body
-        //TODO
-    }
 
-    public static function getUser()
-    {
-        //Récuperer un user de la BD et le passé dans le body
-        //TODO
-    }
-
-    public static function editUser()
-    {
-        //Editer un user de la BD et le passé dans le body
-        //TODO
-    }
-
-    public static function deleteUser()
-    {
-        //Supprimer un user de la BD
-        //TODO  
-        //$response = $this->db->prepare("DELETE FROM user WHERE usr_id=$id);
-        //$response->bindParam($id, $args[$id]);
-        //$response->execute();
-        //$todos = $response->fetchAll();
-        //return $this->response->withJson($todos);
     }
 }

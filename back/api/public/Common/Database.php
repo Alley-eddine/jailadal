@@ -7,7 +7,7 @@ use PDO;
 
 class Database
 {
-    protected $pdo;
+    private $pdo;
 
     public function __construct()
     {
@@ -16,7 +16,8 @@ class Database
             ConfigDb::CONFIG['user'],
             ConfigDb::CONFIG['pwd'],
             [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
             ]
         );
     }
