@@ -1,6 +1,6 @@
 <?php
 
-namespace Entities\Services;
+namespace Services;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -33,7 +33,7 @@ class ItemService
         return $response;
     }
     
-    public function editItem(Request $request, Response $response, string $id): Response
+    public function modifyItem(Request $request, Response $response, string $id): Response
     {
         // TODO: Implémentation de la logique
         $response->getBody()->write("<span>PUT Item $id</span>");

@@ -2,17 +2,10 @@
 
 namespace Routers\RoutingServices;
 
-use Entities\Services\ItemService;
-use Entities\Services\CategoryService;
-use Entities\Services\CartService;
-use Entities\Services\OrderService;
-use Entities\Services\TableService;
-use Entities\Services\UserService;
-
-use Slim\Routing\RouteCollectorProxy as Group;
-
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Services\ItemService;
+use Slim\Routing\RouteCollectorProxy as Group;
 
 class ItemRoutingService
 {
@@ -25,53 +18,45 @@ class ItemRoutingService
 
     public function httpMethodsItemService(Group $group): void
     {
-        $this->httpGetMethod($group);
-        $this->httpGetMethodWithUrlParams($group);
-        $this->httpPostMethod($group);
-        $this->httpDeleteMethod($group);
+        $this->post($group);
+        $this->getAll($group);
+        $this->get($group);
+        $this->put($group);
+        $this->delete($group);
     }
 
-    private function httpGetMethod(Group $group){
+    private function post(Group $group)
+    {
+        $group->post('', function (Request $request, Response $response): Response {
+            return $this->service->createItem($request, $response);
+        });
+    }
+
+    private function getAll(Group $group)
+    {
         $group->get('', function (Request $request, Response $response): Response {
             return $this->service->getItems($request, $response);
         });
     }
 
-    private function httpGetMethodWithUrlParams(Group $group){
-        $group->get('/{$id}', function (Request $request, Response $response, string $id): Response {
-            return $this->service->editItemById($request, $response, $id);
+    private function get(Group $group)
+    {
+        $group->get('/{id}', function (Request $request, Response $response, string $id): Response {
+            return $this->service->getItem($request, $response, $id);
         });
     }
 
-    private function httpPostMethod(Group $group){
-        $group->post('', function (Request $request, Response $response): Response {
-            return $this->services->createItem($request, $response);
+    private function put(Group $group)
+    {
+        $group->put('/{id}', function (Request $request, Response $response, string $id): Response {
+            return $this->service->modifyItem($request, $response, $id);
         });
     }
 
-    private function httpDeleteMethod(Group $group){
-        $group->delete('/{$id}', function (Request $request, Response $response, string $id): Response {
-            return $this->service->deleteItemById($request, $response, $id);
+    private function delete(Group $group)
+    {
+        $group->delete('/{id}', function (Request $request, Response $response, string $id): Response {
+            return $this->service->deleteItem($request, $response, $id);
         });
     }
-
-    // public function httpMethodsOrderService(Group $group){
-    //     $group->get('', function (Request $request, Response $response): Response {
-    //         return $this->services[OrderService::class]->getItems($request, $response);
-    //     });
-
-    //     $group->post('', function (Request $request, Response $response): Response {
-    //         return $this->services[OrderService::class]->postOrder($request, $response);
-    //     });
-
-    //     // url Params
-
-    //     // $group->get('/{$id}', function (Request $request, Response $response, string $id): Response {
-    //     //     return $this->services[OrderService::class]->editOrderById($request, $response, $id);
-    //     // });
-
-    //     // $group->delete('/{$id}', function (Request $request, Response $response, string $id): Response {
-    //     //     return $this->services[OrderService::class]->deleteOrderById($request, $response, $id);
-    //     // });
-    // }
 }

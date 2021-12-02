@@ -11,6 +11,7 @@ use Routers\RoutingServices\ItemRoutingService;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy as Group;
 use Api\IRequestResponseArgs;
+
 class Router
 {
     private App $app;
@@ -53,12 +54,12 @@ class Router
         });
     }
 
-    public function orderRoutingService()
-    {
-        $this->app->group('/order', function (Group $orderGroup): void {
-            $this->orderRoutingService->listenRequests($orderGroup);
-        });
-    }
+    // public function orderRoutingService()
+    // {
+    //     $this->app->group('/order', function (Group $orderGroup): void {
+    //         $this->orderRoutingService->listenRequests($orderGroup);
+    //     });
+    // }
 
     // public function tableRoutingService()
     // {
@@ -74,4 +75,3 @@ class Router
     //     });
     // }
 }
-

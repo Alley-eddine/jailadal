@@ -5,6 +5,7 @@ namespace Abstracts;
 use Slim\App;
 use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;
+use Slim\Handlers\Strategies\RequestResponseArgs;
 
 abstract class ServerImplementation
 {
@@ -17,7 +18,9 @@ abstract class ServerImplementation
     protected function initApp(): self
     {
         $this->app = AppFactory::create();
-
+        $routeCollector = $this->app->getRouteCollector();
+        $routeCollector->setDefaultInvocationStrategy(new RequestResponseArgs());
+        
         return $this;
     }
 

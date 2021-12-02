@@ -117,7 +117,7 @@ class ItemModel
         //Récuperer un plat/menu de la BD et le passé dans le body
     }
 
-    public static function editItem()
+    public static function modifyItem()
     {
         //Editer un plat/menu de la BD et le passé dans le body
     }

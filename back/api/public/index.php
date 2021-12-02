@@ -105,34 +105,3 @@ $server->start();
 
 // Run API
 // $app->run();
-
-?>
-
-<!--!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
-</head>
-
-<body>
-    <!- - POST test - ->
-    <br><br>
-    <form action="/test" method="POST">
-        <input type="text" name="test1" placeholder="test1">
-        <input type="text" name="test2" placeholder="test2">
-        <input type="text" name="test3" placeholder="test3">
-        <button type="submit">Tester le POST</button>
-    </form>
-
-    <!- - Authentication - ->
-    <form action="/authentication" method="POST">
-        <input type="text" name="login" placeholder="login">
-        <input type="text" name="password" placeholder="password">
-        <button type="submit">Authenticate</button>
-    </form>
-</body>
-</html-->
