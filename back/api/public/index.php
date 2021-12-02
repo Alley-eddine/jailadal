@@ -1,6 +1,6 @@
 <?php
 
-use Server\Server;
+use Api\Server;
 
 require '../../vendor/autoload.php';
 

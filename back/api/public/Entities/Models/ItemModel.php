@@ -5,73 +5,76 @@ namespace Entities\Models;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-Class ItemModel {
+class ItemModel
+{
     private string $id;
     public function getId(): string
     {
         return $this->id;
     }
-    public function setId($id):void
+    public function setId($id): void
     {
         $this->id = $id;
     }
 
     private string $name;
-    public function getName():string
+    public function getName(): string
     {
         return $this->name;
     }
-    public function setName($name):void
+    public function setName($name): void
     {
         $this->name = $name;
     }
 
     private string $description;
-    public function getDescription():string
+    public function getDescription(): string
     {
         return $this->description;
     }
-    public function setItmDescription($description):void
+    public function setItmDescription($description): void
     {
         $this->description = $description;
     }
 
     private float $price;
-    public function getPrice():float
+    public function getPrice(): float
     {
         return $this->price;
     }
-    public function setPrice($price):void
+    public function setPrice($price): void
     {
         $this->price = $price;
     }
 
     private string $image;
-    public function getImage():string
+    public function getImage(): string
     {
         return $this->image;
     }
-    public function setImage($image):void
+    public function setImage($image): void
     {
         $this->image = $image;
     }
 
     private int $quantity;
-    public function getQuantity():int
+    public function getQuantity(): int
     {
         return $this->qty;
     }
-    public function setQuantity($qty):void
+    public function setQuantity($qty): void
     {
         $this->qty = $qty;
     }
 
     private int $originalQuantity;
-    public function getOriginalQuantity():int{
+    public function getOriginalQuantity(): int
+    {
         return $this->originalQuantity;
     }
-    public function setItmOriginalQuantity($originalQuantity):void{
-        $this->originalQuantity= $originalQuantity;
+    public function setItmOriginalQuantity($originalQuantity): void
+    {
+        $this->originalQuantity = $originalQuantity;
     }
 
     public function __construct($id, $name, $description, $price, $image, $quantity, $originalQuantity)
@@ -111,4 +114,3 @@ Class ItemModel {
         // (voir dans UserController)
     }
 }
-?>

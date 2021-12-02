@@ -1,47 +1,49 @@
 <?php
+
 namespace Entities\Models;
 
 use DateTime;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-Class OrderModel {
+class OrderModel
+{
     private string $id;
-    public function getId():string
+    public function getId(): string
     {
         return $this->id;
     }
-    public function setId($id):void
+    public function setId($id): void
     {
         $this->id = $id;
     }
 
     private int $status;
-    public function getStatus():int
+    public function getStatus(): int
     {
         return $this->status;
     }
-    public function setStatus($status):void
+    public function setStatus($status): void
     {
         $this->status = $status;
     }
 
     private DateTime $date;
-    public function getDate():DateTime
+    public function getDate(): DateTime
     {
         return $this->date;
     }
-    public function setDate($date):void
+    public function setDate($date): void
     {
         $this->date = $date;
-    }   
+    }
 
     private int $rating;
-    public function getRating():int
+    public function getRating(): int
     {
         return $this->rating;
     }
-    public function setRating($rating):void
+    public function setRating($rating): void
     {
         $this->rating = $rating;
     }
@@ -85,5 +87,3 @@ Class OrderModel {
         // (voir dans UserController)
     }
 }
-
-?>

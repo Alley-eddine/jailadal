@@ -1,8 +1,9 @@
 <?php
+
 namespace Config;
 
-Class ConfigDb {
-
+class ConfigDb
+{
     const CONFIG = [
         "host" => "localhost:3306",
         "dbname" => "jailadal",

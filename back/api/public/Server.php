@@ -1,9 +1,9 @@
 <?php
 
-namespace Server;
+namespace Api;
 
 use Abstracts\ServerImplementation;
-use Router\Router;
+use Routers\Router;
 
 class Server extends ServerImplementation
 {
@@ -26,7 +26,7 @@ class Server extends ServerImplementation
 
     public function routing()
     {
-        $this->router->httpGetMethodRoutingItemService();
+        $this->router->itemRoutingService();
     }
 
     public function start()

@@ -1,26 +1,30 @@
 <?php
+
 namespace Entities\Models;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-Class TableModel {
-	private string $id;
-    public function getId():string{
+class TableModel
+{
+    private string $id;
+    public function getId(): string
+    {
         return $this->id;
     }
-    public function setId($id):void{
+    public function setId($id): void
+    {
         $this->id = $id;
     }
 
     private bool $availability;
-    public function get_Availability():bool
+    public function get_Availability(): bool
     {
         return $this->availability;
     }
-    public function set_Availability($availability):void
+    public function set_Availability($availability): void
     {
-        $this-> availability = $availability;
+        $this->availability = $availability;
     }
 
     public function __construct($id, $availability)
@@ -60,4 +64,3 @@ Class TableModel {
         // (voir dans UserController)
     }
 }
-?>

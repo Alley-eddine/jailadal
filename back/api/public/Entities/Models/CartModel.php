@@ -1,10 +1,19 @@
 <?php
-Class CartModel {
+
+namespace Entities\Models;
+
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
+
+class CartModel
+{
     private string $id;
-    public function getId(){
+    public function getId()
+    {
         return $this->id;
     }
-    public function setId($id){
+    public function setId($id)
+    {
         $this->id = $id;
     }
 
@@ -34,4 +43,3 @@ Class CartModel {
         // (voir dans UserController)
     }
 }
-?>

@@ -1,21 +1,29 @@
 <?php
-Class CategorieModel {
+
+namespace Entities\Models;
+
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
+
+class CategorieModel
+{
     private string $id;
     private string $name;
 
-    public function getId():string
+    public function getId(): string
     {
         return $this->id;
     }
-    public function setId($id):void{
+    public function setId($id): void
+    {
         $this->id = $id;
     }
 
-    public function getName():string
+    public function getName(): string
     {
         return $this->name;
     }
-    public function setName($name):void
+    public function setName($name): void
     {
         $this->id = $name;
     }
@@ -52,4 +60,3 @@ Class CategorieModel {
         // (voir dans UserController)
     }
 }
-?>
