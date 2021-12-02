@@ -2,11 +2,11 @@
     "autoload": {
         "psr-4": {
             "Abstracts\\": "api/public/Abstracts/",
-            "Middlewares\\": "api/public/Middlewares/",
-            "Server\\":"api/public/",
             "Entities\\Models\\": "api/public/Entities/Models/",
             "Entities\\Services\\": "api/public/Entities/Services/",
-            "Router\\":"api/public/Router/"
+            "Middlewares\\": "api/public/Middlewares/",
+            "Routers\\":"api/public/Routers/",
+            "Server\\":"api/public/"
         }
     },
     "require": {

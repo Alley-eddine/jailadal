@@ -10,9 +10,8 @@ use Entities\Services\UserService;
 
 use Slim\Routing\RouteCollectorProxy as Group;
 
-class ItemMiddleware
+class TemporaryTemplate
 {
-
     public function start()
     {
         // Authentication
@@ -60,12 +59,14 @@ class ItemMiddleware
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test</title>
 </head>
+
 <body>
     <form action="/user" method="POST">
         <button type="submit">POST User</button>
@@ -74,7 +75,7 @@ class ItemMiddleware
     <form action="/user" method="GET">
         <button type="submit">GET Users</button>
     </form>
-    
+
     <form action="/user/00000000-0000-0000-0000-000000000000" method="GET">
         <button type="submit">GET User</button>
     </form>
@@ -87,4 +88,5 @@ class ItemMiddleware
         <button type="submit">DELETE User</button>
     </form>
 </body>
+
 </html>

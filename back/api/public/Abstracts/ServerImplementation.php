@@ -10,7 +10,9 @@ abstract class ServerImplementation
 {
     protected App $app;
 
-    protected function __construct(){}
+    protected function __construct()
+    {
+    }
 
     protected function initApp(): self
     {
@@ -19,10 +21,10 @@ abstract class ServerImplementation
         return $this;
     }
 
-    protected function addDecorator(bool $isActive): self
+    protected function addDecorator(bool $enabled): self
     {
-        AppFactory::setSlimHttpDecoratorsAutomaticDetection($isActive);
-        ServerRequestCreatorFactory::setSlimHttpDecoratorsAutomaticDetection($isActive);
+        AppFactory::setSlimHttpDecoratorsAutomaticDetection($enabled);
+        ServerRequestCreatorFactory::setSlimHttpDecoratorsAutomaticDetection($enabled);
 
         return $this;
     }
@@ -32,6 +34,7 @@ abstract class ServerImplementation
         $this->app->addRoutingMiddleware();
         $this->app->addBodyParsingMiddleware();
         $this->app->addErrorMiddleware(true, true, true);
+
         return $this;
     }
 }
