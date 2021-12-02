@@ -1,6 +1,6 @@
 <?php
 
-namespace Entities\Models;
+namespace Models;
 
 use DateTime;
 use Psr\Http\Message\ServerRequestInterface as Request;

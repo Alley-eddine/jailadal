@@ -5,10 +5,11 @@
             "Api\\":"api/public/",
             "Common\\": "api/public/Common/",
             "Config\\": "api/public/Config/",
-            "Entities\\Models\\": "api/public/Entities/Models/",
-            "Entities\\Services\\": "api/public/Entities/Services/",
+            "Entities\\": "app/Entities/",
             "Middlewares\\": "api/public/Middlewares/",
-            "Routers\\":"api/public/Routers/"
+            "Models\\": "app/Models/",
+            "Routers\\":"api/public/Routers/",
+            "Services\\": "app/Services/"
         }
     },
     "require": {
