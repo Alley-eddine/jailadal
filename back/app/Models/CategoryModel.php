@@ -2,62 +2,57 @@
 
 namespace Models;
 
+use Models\DefaultModel;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-class CategoryModel
+class CategoryModel extends DefaultModel
 {
-    private string $id;
-    public function getId(): string
-    {
-        return $this->id;
-    }
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-
-    private string $name;
-    public function getName(): string
-    {
-        return $this->name;
-    }
-    public function setName($name): void
-    {
-        $this->id = $name;
-    }
-
-
-
-    public function __construct($id, $name)
-    {
-        $this->id = $id;
-        $this->name = $name;
-    }
-
     public static function createCategorie()
     {
         //TODO Créer une catégorie sur la BD et les passés dans le body
     }
 
-    public static function getAllCategorie()
+    public function getAllOrders()
     {
-        //Récuperer toutes les catégories de la BD et les passés dans le body
+        $query = $this->pdo->query("SELECT * FROM order");
+        $query->setFetchMode(\PDO::FETCH_CLASS, "\Entity\Models\OrderModel"); // retourne les valeurs en objet
+        $orders = $query->fetchAll();
     }
 
-    public static function getItem()
+    public function getOrder(Int $id)
     {
-        //Récuperer une catégorie de la BD et le passé dans le body
+        $query = $this->pdo->query("SELECT * FROM order WHERE id=$id");
+        $query->setFetchMode(\PDO::FETCH_CLASS, "\Entity\Models\OrderModel"); // retourne les valeurs en objet
+        $order = $query->fetchAll();
     }
 
-    public static function editItem()
+    public function editOrderStatus(Int $id)
     {
-        //Editer une catégorie de la BD et le passé dans le body
+        $query = $this->pdo->query("UPDATE order
+        SET
+        odr_status = :odr_status,
+        odr_rating = :odr_rating
+        WHERE id = $id
+        ");
+        $query->setFetchMode(\PDO::FETCH_CLASS, "\Entities\ItemModel");
+        $article = $query->fetch();
+
     }
 
-    public static function deleteItem()
+    public function createCategory(CategoryModel $category)
     {
-        //TODO Supprimer une catégorie de la BD
-        // (voir dans UserController)
+        if (!empty($item)) {
+            $prepare = $this->pdo->prepare("INSERT INTO categories (id, cat_name) VALUES (:id, :cat_name)");
+            $prepare->execute($category);
+        }
+    }
+
+    public function deleteCategory(int $id)
+    {
+        $query = $this->pdo->query("DELETE FROM categories
+        WHERE id = $id
+        ");
+        $query->execute();
     }
 }

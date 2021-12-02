@@ -3,87 +3,49 @@
 namespace Models;
 
 use DateTime;
+use Models\DefaultModel;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-class OrderModel
+class OrderModel extends DefaultModel
 {
-    private string $id;
-    public function getId(): string
+    public function getAllOrders()
     {
-        return $this->id;
-    }
-    public function setId($id): void
-    {
-        $this->id = $id;
+        $query = $this->pdo->query("SELECT * FROM order");
+        $query->setFetchMode(\PDO::FETCH_CLASS, "\Entity\Models\OrderModel"); // retourne les valeurs en objet
+        $orders = $query->fetchAll();
     }
 
-    private int $status;
-    public function getStatus(): int
+    public function getOrder(Int $id)
     {
-        return $this->status;
-    }
-    public function setStatus($status): void
-    {
-        $this->status = $status;
+        $query = $this->pdo->query("SELECT * FROM order WHERE id=$id");
+        $query->setFetchMode(\PDO::FETCH_CLASS, "\Entity\Models\OrderModel"); // retourne les valeurs en objet
+        $order = $query->fetchAll();
     }
 
-    private DateTime $date;
-    public function getDate(): DateTime
+    public function editOrderStatus(OrderModel $order, Int $id)
     {
-        return $this->date;
-    }
-    public function setDate($date): void
-    {
-        $this->date = $date;
-    }
-
-    private int $rating;
-    public function getRating(): int
-    {
-        return $this->rating;
-    }
-    public function setRating($rating): void
-    {
-        $this->rating = $rating;
+        $query = $this->pdo->query("UPDATE order
+        SET
+        odr_status = :odr_status,
+        odr_rating = :odr_rating
+        WHERE id = $id
+        ");
+        $query->execute($order, $id);
     }
 
-    public function __construct($id, $status, $date, $rating)
+    public function createOrder(OrderModel $order)
     {
-        $this->id = $id;
-        $this->status = $status;
-        $this->date = $date;
-        $this->rating = $rating;
+        if (!empty($item)) {
+            $prepare = $this->pdo->prepare("INSERT INTO order (id, odr_status, odr_date, odr_rating, usr_id) VALUES (:id, :odr_status, :odr_date, :odr_rating, :usr_id");
+            $prepare->execute($item);
+        }
     }
 
-    public static function createOrder()
+    public function deleteOrder(int $id)
     {
-        //Créer une commande sur la BD et les passés dans le body
-        //TODO
-    }
-
-    public static function getAllOrders()
-    {
-        //Récuperer toute les commande de la BD et les passés dans le body
-        //TODO
-    }
-
-    public static function getOrder()
-    {
-        //Récuperer une commande de la BD et le passé dans le body
-        //TODO
-    }
-
-    public static function editOrder()
-    {
-        //Editer une commande de la BD et le passé dans le body
-        //TODO
-    }
-
-    public static function deleteOrder()
-    {
-        //Supprimer une commande de la BD
-        //TODO  
-        // (voir dans UserController)
+        $query = $this->pdo->query("DELETE FROM order 
+        WHERE id = $id");
+        $query->execute();
     }
 }

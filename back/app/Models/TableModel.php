@@ -2,65 +2,52 @@
 
 namespace Models;
 
+use Models\DefaultModel;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-class TableModel
+class TableModel extends DefaultModel
 {
-    private string $id;
-    public function getId(): string
-    {
-        return $this->id;
-    }
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
 
-    private bool $availability;
-    public function get_Availability(): bool
-    {
-        return $this->availability;
-    }
-    public function set_Availability($availability): void
-    {
-        $this->availability = $availability;
-    }
 
-    public function __construct($id, $availability)
-    {
-        $this->id = $id;
-        $this->availability = $availability;
-    }
-
-    public static function createTable()
-    {
-        //Créer une table sur la BD et les passés dans le body
-        //TODO
-    }
-
-    public static function getAllTables()
-    {
-        //Récuperer toute les tables de la BD et les passés dans le body
-        //TODO
-    }
-
-    public static function getTable()
+    public function getTable(Int $id)
     {
         //Récuperer une table de la BD et le passé dans le body
-        //TODO
+        $query = $this->pdo->query("SELECT * FROM `table` WHERE id=$id");
+        $query->setFetchMode(\PDO::FETCH_CLASS, "\Entities\Models\TableModel"); // retourne les valeurs en objet
+        $table = $query->fetchAll();
     }
 
-    public static function editTable()
+    public function createTable(ItemModel $table)
     {
-        //Editer une table de la BD et le passé dans le body
-        //TODO
+        if (!empty($table)) {
+            $prepare = $this->pdo->prepare("INSERT INTO `table` (id, tbl_availability, usr_id) VALUES (:id, :tbl_availability, :usr_id)");
+            $prepare->execute($table);
+        }
     }
 
-    public static function deleteTable()
+    public function getAllTables()
     {
-        //Supprimer une table de la BD
-        //TODO  
-        // (voir dans UserController)
+        //Récuperer tout les plats/menus de la BD et les passés dans le body
+        $query = $this->pdo->query("SELECT * FROM `table`");
+        $query->setFetchMode(\PDO::FETCH_CLASS, "\Entities\Models\TableModel"); // retourne les valeurs en objet
+        $tables = $query->fetchAll();
+    }
+
+    public function editTable(TableModel $table, $id)
+    {
+        $query = $this->pdo->query("UPDATE `table`
+        SET
+        tbl_availability = :tbl_availability,
+        usr_id = :usr_id, 
+        WHERE id = $id");
+        $query->execute($table, $id);
+    }
+
+    public function deleteTable(int $id)
+    {
+        $query = $this->pdo->query("DELETE FROM `table` 
+        WHERE id = $id");
+        $query->execute($id);
     }
 }

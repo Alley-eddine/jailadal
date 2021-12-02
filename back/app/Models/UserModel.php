@@ -8,22 +8,31 @@ class UserModel extends DefaultModel
 {
     protected $table = "user";
 
-    public function create(array $entity)
+    public function createUser(array $entity)
     {
         $uuid = $this->newUuid();
     
         $query = "INSERT INTO user
-        (id, test1, test2, test3, test4, test5)
-        VALUES ($uuid, :test1Value, :test2Value, :test3Value, :test4Value, :test5Value)
+        (id, usr_lastname, usr_firstname, usr_mail, usr_phone, usr_password, usr_picture_url, usr_privilege)
+        VALUES ($uuid, :id, :usr_lastname, :usr_firstname, :usr_mail, :usr_phone, usr_password, usr_picture_url, usr_privilege)
         ";
 
         return $this->save($query, $entity);
     }
 
-    public function edit(array $entity)
+    public function editUser(array $entity)
     {
         // TODO: retourner le bon query
-        $query = "";
+        $query = "UPDATE user
+        SET
+        usr_lastname = :usr_lastname,
+        usr_fisrtname = :usr_fisrtname,
+        usr_mail = :usr_mail,
+        usr_phone = :usr_phone,
+        usr_password = :usr_password,
+        usr_picture_url = :usr_picture_url,
+        usr_privilege = :usr_privilege
+        WHERE id = :id";
         return $this->save($query, $entity);
     }
 }

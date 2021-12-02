@@ -2,93 +2,13 @@
 
 namespace Models;
 
+use Models\DefaultModel;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-class ItemModel
+class ItemModel extends DefaultModel
 {
-    private string $id;
-    public function getId(): string
-    {
-        return $this->id;
-    }
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
 
-    private string $name;
-    public function getName(): string
-    {
-        return $this->name;
-    }
-    public function setName($name): void
-    {
-        $this->name = $name;
-    }
-
-    private string $description;
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-    public function setItmDescription($description): void
-    {
-        $this->description = $description;
-    }
-
-    private float $price;
-    public function getPrice(): float
-    {
-        return $this->price;
-    }
-    public function setPrice($price): void
-    {
-        $this->price = $price;
-    }
-
-    private string $image;
-    public function getImage(): string
-    {
-        return $this->image;
-    }
-    public function setImage($image): void
-    {
-        $this->image = $image;
-    }
-
-    private int $quantity;
-    public function getQuantity(): int
-    {
-        return $this->quantity;
-    }
-    public function setQuantity($quantity): void
-    {
-        $this->quantity = $quantity;
-    }
-
-    private int $originalQuantity;
-    public function getOriginalQuantity(): int
-    {
-        return $this->originalQuantity;
-    }
-    public function setOriginalQuantity($originalQuantity): void
-    {
-        $this->originalQuantity = $originalQuantity;
-    }
-
-    public function __construct($id, $name, $description, $price, $image, $quantity, $originalQuantity)
-    {
-        $this->id = $id;
-        $this->name = $name;
-        $this->description = $description;
-        $this->price = $price;
-        $this->image = $image;
-        $this->quantity = $quantity;
-        $this->originalQuantity = $originalQuantity;
-    }
-
-    private String $categoryId;
     public function getCategory(): string
     {
         return $this->category;
@@ -100,31 +20,50 @@ class ItemModel
 
     public function createItem(ItemModel $item)
     {
-        //TODO Créer un plat/menu sur la BD et les passés dans le body
+        //TODO Créer un article sur la BD
         if (!empty($item)) {
             $prepare = $this->pdo->prepare("INSERT INTO item (itm_id, itm_name, itm_description, itm_price, itm_image,  itm_qty, itm_original_qty) VALUES (:itm_id, :itm_name, :itm_description, :itm_price, :itm_image, :itm_qty, :itm_original_qty, :cat_id");
             $prepare->execute($item);
         }
     }
 
-    public static function getAllItems()
+    public function getAllItems()
     {
         //Récuperer tout les plats/menus de la BD et les passés dans le body
+        $query = $this->pdo->query("SELECT * FROM items");
+        $query->setFetchMode(\PDO::FETCH_CLASS, "\Entities\Models\ItemModel"); // retourne les valeurs en objet
+        $items = $query->fetchAll();
     }
 
-    public static function getItem()
+    public function getItem(Int $id)
     {
-        //Récuperer un plat/menu de la BD et le passé dans le body
+        $query = $this->pdo->query("SELECT * FROM items WHERE id=$id");
+        $query->setFetchMode(\PDO::FETCH_CLASS, "\Entities\Models\ItemModel"); // retourne les valeurs en objet
+        $item = $query->fetchAll();
     }
 
-    public static function modifyItem()
+    public function editItem(ItemModel $item, Int $id)
     {
         //Editer un plat/menu de la BD et le passé dans le body
+        $query = $this->pdo->query("UPDATE items
+        SET
+        itm_name = :itm_name, 
+        itm_description = :itm_name, 
+        itm_price = :itm_price, 
+        itm_image = :itm_image,  
+        itm_qty = :itm_qty, 
+        itm_original_qty = :itm_original,
+        cat_id = :cat_id
+        WHERE id = $id
+        ");
+        $query->execute($id);
     }
 
-    public static function deleteItem()
+    public function deleteItem(int $id)
     {
-        //TODO Supprimer un plat/menu de la BD
-        // (voir dans UserController)
+        $query = $this->pdo->query("DELETE FROM items 
+        WHERE id = $id
+        ");
+        $query->execute($id);
     }
 }

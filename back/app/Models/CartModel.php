@@ -5,23 +5,8 @@ namespace Models;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-class CartModel
+class CartModel extends DefaultModel
 {
-    private string $id;
-    public function getId()
-    {
-        return $this->id;
-    }
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    public function __construct($id)
-    {
-        $this->id = $id;
-    }
-
     public static function createCart()
     {
         //TODO Créer un panier sur la BD et les passés dans le body
