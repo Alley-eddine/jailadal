@@ -72,7 +72,7 @@ class ItemModel
     {
         return $this->originalQuantity;
     }
-    public function setItmOriginalQuantity($originalQuantity): void
+    public function setOriginalQuantity($originalQuantity): void
     {
         $this->originalQuantity = $originalQuantity;
     }
@@ -88,9 +88,23 @@ class ItemModel
         $this->originalQuantity = $originalQuantity;
     }
 
-    public static function createItem()
+    private String $categoryId;
+    public function getCategory(): string
+    {
+        return $this->category;
+    }
+    public function setCategory(string $categoryId): void
+    {
+        $this->categoryId = $categoryId;
+    }
+
+    public function createItem(ItemModel $item)
     {
         //TODO Créer un plat/menu sur la BD et les passés dans le body
+        if (!empty($item)) {
+            $prepare = $this->pdo->prepare("INSERT INTO item (itm_id, itm_name, itm_description, itm_price, itm_image,  itm_qty, itm_original_qty) VALUES (:itm_id, :itm_name, :itm_description, :itm_price, :itm_image, :itm_qty, :itm_original_qty, :cat_id");
+            $prepare->execute($item);
+        }
     }
 
     public static function getAllItems()

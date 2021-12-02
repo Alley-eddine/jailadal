@@ -8,8 +8,6 @@ use Psr\Http\Message\ResponseInterface as Response;
 class CategoryModel
 {
     private string $id;
-    private string $name;
-
     public function getId(): string
     {
         return $this->id;
@@ -19,6 +17,7 @@ class CategoryModel
         $this->id = $id;
     }
 
+    private string $name;
     public function getName(): string
     {
         return $this->name;
@@ -27,6 +26,8 @@ class CategoryModel
     {
         $this->id = $name;
     }
+
+
 
     public function __construct($id, $name)
     {
