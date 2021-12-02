@@ -7,7 +7,7 @@ use Slim\Routing\RouteCollectorProxy as Group;
 
 class ItemRoutingService
 {
-    public function getAllItems(Group $group): void
+    public function listenRequests(Group $group): void
     {
         $group->get('', [ItemService::class, 'getAllItems']);
     }

@@ -21,7 +21,7 @@ class Router
     public function itemRoutingService()
     {
         $this->app->group('/item', function (Group $itemGroup): void {
-            $this->itemRoutingService->getAllItems($itemGroup);
+            $this->itemRoutingService->listenRequests($itemGroup);
         });
     }
 }
