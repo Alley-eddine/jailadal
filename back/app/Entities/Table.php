@@ -25,11 +25,4 @@ Class Table {
     {
         $this->availability = $availability;
     }
-
-    public function __construct($id, $availability, $usr_id)
-    {
-        $this->id = $id;
-        $this->availability = $availability;
-        $this->usr_id = $usr_id;
-    }
 }

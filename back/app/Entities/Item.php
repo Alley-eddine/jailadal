@@ -75,15 +75,13 @@ Class Item{
         $this->originalQuantity = $originalQuantity;
     }
 
-    public function __construct($id, $name, $description, $price, $image, $quantity, $originalQuantity, $categoryId)
+    public function getCategory(): string
     {
-        $this->id = $id;
-        $this->name = $name;
-        $this->description = $description;
-        $this->price = $price;
-        $this->image = $image;
-        $this->quantity = $quantity;
-        $this->originalQuantity = $originalQuantity;
+        return $this->category;
+    }
+    public function setCategory(string $categoryId): void
+    {
         $this->categoryId = $categoryId;
     }
+    
 }

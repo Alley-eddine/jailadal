@@ -33,11 +33,13 @@ class DefaultModel
         return $query->fetch();
     }
 
-    public function delete(string $id): void
+    public function delete(string $id):void
     {
-        //TODO: delete en database l'entité
+        $query = $this->pdo->query("DELETE FROM $this->table 
+        WHERE id = $id");
+        $query->execute($id);
     }
-
+    
     protected function newUuid(): string
     {
         return sprintf(

@@ -2,29 +2,22 @@
 
 namespace Models;
 
+
+use Models\DefaultModel;
+
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
 class CartModel extends DefaultModel
 {
-    public static function createCart()
-    {
-        //TODO Créer un panier sur la BD et les passés dans le body
-    }
+    protected $table = "cart";
 
-    public static function getCart()
+    public function createCart(array $entity)
     {
-        //Récuperer un panier de la BD et le passé dans le body
-    }
-
-    public static function editCart()
-    {
-        //Editer un panier de la BD et le passé dans le body
-    }
-
-    public static function deleteCart()
-    {
-        //TODO Supprimer un panier de la BD
-        // (voir dans UserController)
+        $uuid = $this->newUuid();
+        if (!empty($entity)) {
+            $query = $this->pdo->prepare("INSERT INTO cart (id, usr_id) VALUES ($uuid, :usr_id)");
+            return $this->save($query, $entity);
+        }
     }
 }

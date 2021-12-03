@@ -22,7 +22,6 @@ class UserModel extends DefaultModel
 
     public function editUser(array $entity)
     {
-        // TODO: retourner le bon query
         $query = "UPDATE user
         SET
         usr_lastname = :usr_lastname,

@@ -8,46 +8,33 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 class TableModel extends DefaultModel
 {
+    protected $table = "table";
 
-
-    public function getTable(Int $id)
+    public function createTable(array $entity)
     {
-        //Récuperer une table de la BD et le passé dans le body
-        $query = $this->pdo->query("SELECT * FROM `table` WHERE id=$id");
-        $query->setFetchMode(\PDO::FETCH_CLASS, "\Entities\Models\TableModel"); // retourne les valeurs en objet
-        $table = $query->fetchAll();
+        $uuid = $this->newUuid();
+
+        $query = $this->pdo->query("INSERT INTO table
+        (id,
+        tbl_availability,
+        usr_id)
+        VALUES
+        ($uuid,
+        :tbl_availability,
+        :usr_id)");
+        return $this->save($query, $entity);
+
     }
 
-    public function createTable(ItemModel $table)
+    public function editTable(array $entity)
     {
-        if (!empty($table)) {
-            $prepare = $this->pdo->prepare("INSERT INTO `table` (id, tbl_availability, usr_id) VALUES (:id, :tbl_availability, :usr_id)");
-            $prepare->execute($table);
-        }
-    }
-
-    public function getAllTables()
-    {
-        //Récuperer tout les plats/menus de la BD et les passés dans le body
-        $query = $this->pdo->query("SELECT * FROM `table`");
-        $query->setFetchMode(\PDO::FETCH_CLASS, "\Entities\Models\TableModel"); // retourne les valeurs en objet
-        $tables = $query->fetchAll();
-    }
-
-    public function editTable(TableModel $table, $id)
-    {
-        $query = $this->pdo->query("UPDATE `table`
+        $query = $this->pdo->query("UPDATE table
         SET
         tbl_availability = :tbl_availability,
         usr_id = :usr_id, 
-        WHERE id = $id");
-        $query->execute($table, $id);
+        WHERE id = :id");
+        return $this->save($query, $entity);
     }
 
-    public function deleteTable(int $id)
-    {
-        $query = $this->pdo->query("DELETE FROM `table` 
-        WHERE id = $id");
-        $query->execute($id);
-    }
+
 }
