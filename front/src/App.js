@@ -5,6 +5,7 @@ import Register from './components/register/Register'
 import BestSellers from './components/best-seller/BestSellers'
 import Login from './components/login/Login'
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import Table from './components/table/Table'
 
 function App() {
     return (
@@ -19,7 +20,6 @@ function App() {
                     <Route exact path={'/'}>
                         <div><BestSellers/></div>
                         <div><Items/></div>
-                        <Register/>
                     </Route>
 
 
@@ -28,8 +28,13 @@ function App() {
                     </Route>
 
 
-                    {/*<Table />*/}
+                    <Route exact path={'/reservez'}>
+                        <Table />
+                    </Route>
 
+                    <Route exact path={'/register'}>
+                        <Register />
+                    </Route>
 
                 </div>
             </Switch>

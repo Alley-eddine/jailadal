@@ -8,15 +8,15 @@ export default function Register() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <p>Prénom:</p>
+            <h1>Prénom:</h1>
             <input {...register("usr_firstname", { required: true, maxLength: 20 })} />
-            <p>Nom:</p>
+            <h1>Nom:</h1>
             <input {...register("usr_lastname", { pattern: /^[A-Za-z]+$/i })} />
-            <p>Mail:</p>
+            <h1>Mail:</h1>
             <input {...register("usr_mail")} />
-            <p>Téléphone:</p>
+            <h1>Téléphone:</h1>
             <input type="number" {...register("usr_phone" )}/>
-            <p>Password:</p>
+            <h1>Password:</h1>
             <input type="password" {...register("usr_password", { required: true })} />
             <input type="submit" />
         </form>
