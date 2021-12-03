@@ -35,6 +35,4 @@ class TableModel extends DefaultModel
         WHERE id = :id");
         return $this->save($query, $entity);
     }
-
-
 }

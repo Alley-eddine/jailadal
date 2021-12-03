@@ -87,29 +87,6 @@ VALUES
     'Dessert'
   );
 
-INSERT INTO
-  `cart` (`id`, `usr_id`)
-VALUES
-  (
-    '414233c1-79e1-4c1e-b36f-ddacf308a8d5',
-    '2d64bc83-f45f-4a04-bd60-8da98a130eea'
-  ),
-  (
-    '017a9147-5a0e-4099-891d-bbf39011fdd6',
-    '3c09a81a-b2a1-478c-8416-654902bf664b'
-  ),
-  (
-    '3ea075c1-6ae7-47fc-a494-bce6f578c593',
-    '448d0bf6-12be-4861-9f08-2940422e3b7c'
-  ),
-  (
-    'dd2f2d25-2d5d-4858-82b3-498c5750c4db',
-    'ea55bba5-2ea4-49fc-ab3d-265d43691950'
-  ),
-  (
-    '1f2cc429-e358-4fc8-bb38-a09e540dae43',
-    'fd31d2d2-1b36-42d4-8d02-8a164f83c12e'
-  );
 
 INSERT INTO
   `items` (
@@ -182,4 +159,41 @@ VALUES
     '150',
     '150',
     'c2fdea93-072d-4524-b7e2-923cd14f41b6'
+  );
+
+INSERT INTO 
+  `cart` (`id`, `usr_id`) 
+VALUES 
+  (
+    '9e64d782-4dd4-468f-a16f-6e607ac91a06',
+   '2d64bc83-f45f-4a04-bd60-8da98a130eea'
+   ), 
+  (
+    '07712de9-a87f-4363-a9af-bb89b1c37bea',
+   '3c09a81a-b2a1-478c-8416-654902bf664b'
+   ), 
+  (
+    '642ba958-4968-4a4a-95e4-44c3d68401e3',
+   'ea55bba5-2ea4-49fc-ab3d-265d43691950'
+   ), 
+  (
+    '2243e053-e8ee-4114-bf85-61a49ba551b2',
+   'fd31d2d2-1b36-42d4-8d02-8a164f83c12e'
+   );
+
+INSERT INTO 
+  `order` (`id`, `odr_status`, `odr_date`, `odr_rating`, `usr_id`) 
+VALUES 
+  (
+    '049052e0-df35-4f3f-9614-a830f583578d',
+    '1', '2021-12-03',
+    '2',
+    '2d64bc83-f45f-4a04-bd60-8da98a130eea'
+  ), 
+  (
+    'bea1a4ce-a0cc-4426-a3e0-8007714ffc02', 
+    '2', 
+    '2021-12-03', 
+    '4', 
+    '3c09a81a-b2a1-478c-8416-654902bf664b'
   );
