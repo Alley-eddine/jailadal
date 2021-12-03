@@ -14,17 +14,20 @@ class CartModel extends EntityModel
         $this->validityCheck($cart);
 
         $uuid = $this->newUuid();
+        $usr_id = $cart->getUsrId();
+
         $query = $this->pdo->prepare(
             "INSERT INTO cart
             (
-                id
+                id,
+                usr_id
             )
             VALUES
             (
                 $uuid,
+                $usr_id
             )"
         );
-
         return $this->save($query);
     }
 
@@ -32,13 +35,15 @@ class CartModel extends EntityModel
     {
         $this->validityCheck($cart);
 
+        $usr_id = $cart->getUsrId();
+
         $query = $this->pdo->query(
             "UPDATE cart
             SET
+            usr_id = $usr_id
             WHERE
             id = $id"
         );
-
         return $this->save($query);
     }
 }

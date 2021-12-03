@@ -4,14 +4,14 @@ namespace Entities;
 
 class Category extends Entity
 {
-    private string $name;
+    private string $cat_name;
     
     public function getName(): string
     {
-        return $this->name;
+        return $this->cat_name;
     }
     public function setName($name): void
     {
-        $this->id = $name;
+        $this->cat_name = $name;
     }
 }

@@ -6,36 +6,36 @@ use DateTime;
 
 class Order extends Entity
 {
-    private int $status;
-    private DateTime $date;
-    private int $rating;
+    private int $odr_status;
+    private DateTime $odr_date;
+    private int $odr_rating;
     private string $usr_id;
 
     public function getStatus(): int
     {
-        return $this->status;
+        return $this->odr_status;
     }
     public function setStatus($status): void
     {
-        $this->status = $status;
+        $this->odr_status = $status;
     }
 
     public function getDate(): DateTime
     {
-        return $this->date;
+        return $this->odr_date;
     }
     public function setDate($date): void
     {
-        $this->date = $date;
+        $this->odr_date = $date;
     }
 
     public function getRating(): int
     {
-        return $this->rating;
+        return $this->odr_rating;
     }
     public function setRating($rating): void
     {
-        $this->rating = $rating;
+        $this->odr_rating = $rating;
     }
 
     public function getUsrId(): string

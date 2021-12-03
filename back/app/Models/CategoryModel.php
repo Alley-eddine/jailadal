@@ -14,17 +14,20 @@ class CategoryModel extends EntityModel
         $this->validityCheck($category);
 
         $uuid = $this->newUuid();
+        $name = $category->getName();
+
         $query = $this->pdo->prepare(
-            "INSERT INTO category
+            "INSERT INTO categories
             (
-                id
+                id,
+                cat_name
             )
             VALUES
             (
                 $uuid,
+                $name
             )"
         );
-
         return $this->save($query);
     }
 
@@ -32,9 +35,12 @@ class CategoryModel extends EntityModel
     {
         $this->validityCheck($category);
 
+        $name = $category->getName();
+
         $query = $this->pdo->query(
-            "UPDATE category
+            "UPDATE categories
             SET
+            cat_name = $name 
             WHERE
             id = $id"
         );

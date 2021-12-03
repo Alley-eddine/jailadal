@@ -5,16 +5,16 @@ namespace Entities;
 
 class Table extends Entity
 {
-    private bool $availability;
+    private bool $tbl_availability;
     private string $usr_id;
 
     public function get_Availability(): bool
     {
-        return $this->availability;
+        return $this->tbl_availability;
     }
     public function set_Availability($availability): void
     {
-        $this->availability = $availability;
+        $this->tbl_availability = $availability;
     }
 
     public function getUsrId(): string
