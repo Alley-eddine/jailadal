@@ -2,48 +2,57 @@
 
 namespace Services;
 
+use Models\UserModel;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Services\EntityService;
 
-class UserService
+class UserService extends EntityService
 {
+    public function getUsers(Response $response): Response
+    {
+        $model = new UserModel;
+        $users = $model->getAll();
+
+        return $this->jsonResponse($users, $response)
+            ->withStatus(200);
+    }
+
+    public function getUser(Response $response, string $id): Response
+    {
+        $model = new UserModel;
+        $users = $model->get($id);
+
+        return $this->jsonResponse($users, $response)
+            ->withStatus(200);
+    }
+
     public function createUser(Request $request, Response $response): Response
     {
-        // TODO: Implémentation de la logique
-        $response->getBody()->write("<span>POST User</span>");
-        return $response;
-    }
-    
-    public function getAllUsers(Request $request, Response $response): Response
-    {
-        // TODO:
-        // Instancier un UserModel.
-        // Appeler la méthode appropriée à la construction de UserModel dans sa liste de méthodes.
-        // Formater l"UserModel en JSON.
-        // Ajouter le JSON au body de $response.
+        $model = new UserModel;
+        $user = $request->getParsedBody();
+        $model->createUser($user);
 
-        $response->getBody()->write("<span>GET All Users</span>");
-        return $response;
+        return $response
+            ->withStatus(201);
     }
-    
-    public function getUser(Request $request, Response $response, string $id): Response
+
+    public function modifyUser(Request $request, Response $response, string $id): Response
     {
-        // TODO: Implémentation de la logique
-        $response->getBody()->write("<span>GET User $id</span>");
-        return $response;
+        $model = new UserModel;
+        $user = $request->getParsedBody();
+        $model->modifyUser($user, $id);
+
+        return $response
+            ->withStatus(204);
     }
-    
-    public function editUser(Request $request, Response $response, string $id): Response
-    {
-        // TODO: Implémentation de la logique
-        $response->getBody()->write("<span>PUT User $id</span>");
-        return $response;
-    }
-    
+
     public function deleteUser(Request $request, Response $response, string $id): Response
     {
-        // TODO: Implémentation de la logique
-        $response->getBody()->write("<span>DELETE User $id</span>");
-        return $response;
+        $model = new UserModel;
+        $model->delete($id);
+
+        return $response
+            ->withStatus(204);
     }
 }

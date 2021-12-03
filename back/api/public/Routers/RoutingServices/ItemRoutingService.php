@@ -2,7 +2,6 @@
 
 namespace Routers\RoutingServices;
 
-use Middlewares\AuthenticationMiddleware;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Services\ItemService;
@@ -21,34 +20,29 @@ class ItemRoutingService
     {
         $this->getAll($group);
         $this->get($group);
+        $this->post($group);
+        $this->put($group);
+        $this->delete($group);
+    }
 
-        $group->group('', function (Group $itemAuthenticationGroup): void
-        {
-            $this->post($itemAuthenticationGroup);
-            $this->put($itemAuthenticationGroup);
-            $this->delete($itemAuthenticationGroup);
+    private function getAll(Group $group)
+    {
+        $group->get('', function (Response $response): Response {
+            return $this->service->getItems($response);
         });
+    }
 
+    private function get(Group $group)
+    {
+        $group->get('/{id}', function (Response $response, string $id): Response {
+            return $this->service->getItem($response, $id);
+        });
     }
 
     private function post(Group $group)
     {
         $group->post('', function (Request $request, Response $response): Response {
             return $this->service->createItem($request, $response);
-        });
-    }
-
-    private function getAll(Group $group)
-    {
-        $group->get('', function (Request $request, Response $response): Response {
-            return $this->service->getItems($request, $response);
-        });
-    }
-
-    private function get(Group $group)
-    {
-        $group->get('/{id}', function (Request $request, Response $response, string $id): Response {
-            return $this->service->getItem($request, $response, $id);
         });
     }
 

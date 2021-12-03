@@ -1,19 +1,11 @@
 <?php
+
 namespace Entities;
 
-Class Category{
-    private string $id;
+class Category extends Entity
+{
     private string $name;
-
-    public function getId(): string
-    {
-        return $this->id;
-    }
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-
+    
     public function getName(): string
     {
         return $this->name;

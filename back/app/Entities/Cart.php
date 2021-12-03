@@ -2,15 +2,16 @@
 
 namespace Entities;
 
-Class Cart{
-    private string $id;
-    
-    public function getId()
+class Cart extends Entity
+{
+    private string $usr_id;
+
+    public function getUsrId(): string
     {
-        return $this->id;
+        return $this->usr_id;
     }
-    public function setId($id)
+    public function setUsrId($usr_id): void
     {
-        $this->id = $id;
+        $this->usr_id = $usr_id;
     }
 }

@@ -3,19 +3,10 @@
 namespace Entities;
 
 
-Class Table {
-    private string $id;
+class Table extends Entity
+{
     private bool $availability;
     private string $usr_id;
-
-    public function getId(): string
-    {
-        return $this->id;
-    }
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
 
     public function get_Availability(): bool
     {
@@ -24,5 +15,14 @@ Class Table {
     public function set_Availability($availability): void
     {
         $this->availability = $availability;
+    }
+
+    public function getUsrId(): string
+    {
+        return $this->usr_id;
+    }
+    public function setUsrId($usr_id): void
+    {
+        $this->usr_id = $usr_id;
     }
 }

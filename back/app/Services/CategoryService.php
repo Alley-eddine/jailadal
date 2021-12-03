@@ -2,48 +2,57 @@
 
 namespace Services;
 
+use Models\CategoryModel;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Services\EntityService;
 
-class CategoryService
+class CategoryService extends EntityService
 {
+    public function getCategories(Response $response): Response
+    {
+        $model = new CategoryModel;
+        $categories = $model->getAll();
+
+        return $this->jsonResponse($categories, $response)
+            ->withStatus(200);
+    }
+
+    public function getCategory(Response $response, string $id): Response
+    {
+        $model = new CategoryModel;
+        $categories = $model->get($id);
+
+        return $this->jsonResponse($categories, $response)
+            ->withStatus(200);
+    }
+
     public function createCategory(Request $request, Response $response): Response
     {
-        // TODO: Implémentation de la logique
-        $response->getBody()->write("<span>POST Category</span>");
-        return $response;
-    }
-    
-    public function getAllCategories(Request $request, Response $response): Response
-    {
-        // TODO:
-        // Instancier un CategoryModel.
-        // Appeler la méthode appropriée à la construction de CategoryModel dans sa liste de méthodes.
-        // Formater l"CategoryModel en JSON.
-        // Ajouter le JSON au body de $response.
+        $model = new CategoryModel;
+        $category = $request->getParsedBody();
+        $model->createCategory($category);
 
-        $response->getBody()->write("<span>GET All Categories</span>");
-        return $response;
+        return $response
+            ->withStatus(201);
     }
-    
-    public function getCategory(Request $request, Response $response, string $id): Response
+
+    public function modifyCategory(Request $request, Response $response, string $id): Response
     {
-        // TODO: Implémentation de la logique
-        $response->getBody()->write("<span>GET Category $id</span>");
-        return $response;
+        $model = new CategoryModel;
+        $category = $request->getParsedBody();
+        $model->modifyCategory($category, $id);
+
+        return $response
+            ->withStatus(204);
     }
-    
-    public function editCategory(Request $request, Response $response, string $id): Response
-    {
-        // TODO: Implémentation de la logique
-        $response->getBody()->write("<span>PUT Category $id</span>");
-        return $response;
-    }
-    
+
     public function deleteCategory(Request $request, Response $response, string $id): Response
     {
-        // TODO: Implémentation de la logique
-        $response->getBody()->write("<span>DELETE Category $id</span>");
-        return $response;
+        $model = new CategoryModel;
+        $model->delete($id);
+
+        return $response
+            ->withStatus(204);
     }
 }

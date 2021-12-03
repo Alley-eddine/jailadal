@@ -2,9 +2,8 @@
 
 namespace Entities;
 
-class User
+class User extends Entity
 {
-    private string $id;
     private string $usr_lastname;
     private string $usr_firstname;
     private string $usr_mail;
@@ -12,15 +11,6 @@ class User
     private string $usr_password;
     private string $usr_picture_url;
     private bool $usr_privilege;
-
-    public function getId(): string
-    {
-        return $this->id;
-    }
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
 
     public function getLastname(): string
     {

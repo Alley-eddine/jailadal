@@ -2,32 +2,43 @@
 
 namespace Models;
 
-use DateTime;
-use Models\DefaultModel;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
+use Entities\Order;
+use Models\EntityModel;
 
-class OrderModel extends DefaultModel
+class OrderModel extends EntityModel
 {
     protected $table = "order";
-    
-    public function editOrderStatus(array $entity)
+
+    public function createOrder(Order $order)
     {
-        $query = $this->pdo->query("UPDATE order
-        SET
-        odr_status = :odr_status,
-        odr_rating = :odr_rating,
-        WHERE id = :id");
-        return $this->save($query, $entity);
+        $this->validityCheck($order);
+
+        $uuid = $this->newUuid();
+        $query = $this->pdo->prepare(
+            "INSERT INTO order
+            (
+                id
+            )
+            VALUES
+            (
+                $uuid,
+            )"
+        );
+
+        return $this->save($query);
     }
 
-    public function createOrder(array $entity)
+    public function modifyOrder(Order $order, string $id)
     {
-        $uuid = $this->newUuid();
+        $this->validityCheck($order);
 
-        if (!empty($item)) {
-            $query = $this->pdo->prepare("INSERT INTO order (id, odr_status, odr_date, odr_rating, usr_id) VALUES (:$uuid, :odr_status, :odr_date, :odr_rating, :usr_id");
-            return $this->save($query, $entity);
-        }
+        $query = $this->pdo->query(
+            "UPDATE order
+            SET
+            WHERE
+            id = $id"
+        );
+
+        return $this->save($query);
     }
 }

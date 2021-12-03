@@ -4,21 +4,12 @@ namespace Entities;
 
 use DateTime;
 
-Class Order{
-    private string $id;
+class Order extends Entity
+{
     private int $status;
     private DateTime $date;
     private int $rating;
     private string $usr_id;
-
-    public function getId(): string
-    {
-        return $this->id;
-    }
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
 
     public function getStatus(): int
     {
@@ -47,9 +38,9 @@ Class Order{
         $this->rating = $rating;
     }
 
-    public function getUsrId(): int
+    public function getUsrId(): string
     {
-        return $this->rating;
+        return $this->usr_id;
     }
     public function setUsrId($usr_id): void
     {

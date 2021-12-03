@@ -3,39 +3,79 @@
 namespace Models;
 
 use Entities\Item;
-use Models\DefaultModel;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
+use Models\EntityModel;
 
-class ItemModel extends DefaultModel
+class ItemModel extends EntityModel
 {
     protected $table = "item";
 
-    public function createItem(array $entity)
+    public function createItem(Item $item)
     {
+        $this->validityCheck($item);
+
         $uuid = $this->newUuid();
 
-        //TODO Créer un article sur la BD
-        if (!empty($item)) {
-            $query = $this->pdo->prepare("INSERT INTO item (id, itm_name, itm_description, itm_price, itm_image,  itm_qty, itm_original_qty) VALUES (:$uuid, :itm_name, :itm_description, :itm_price, :itm_image, :itm_qty, :itm_original_qty, :cat_id");
-            return $this->save($query, $entity);
-        }
+        $name = $item->getName();
+        $description = $item->getDescription();
+        $price = $item->getPrice();
+        $image = $item->getImage();
+        $quantity = $item->getQuantity();
+        $originalQuantity = $item->getOriginalQuantity();
+        $categoryId = $item->getCategoryId();
+
+        $query = $this->pdo->prepare(
+            "INSERT INTO item
+            (
+                id,
+                itm_name,
+                itm_description,
+                itm_price, itm_image, 
+                itm_qty,
+                itm_original_qty,
+                cat_id
+            )
+            VALUES
+            (
+                $uuid,
+                $name,
+                $description,
+                $price,
+                $image,
+                $quantity,
+                $originalQuantity,
+                $categoryId
+            )"
+        );
+
+        return $this->save($query);
     }
 
-    public function editItem(array $entity)
+    public function modifyItem(Item $item, string $id)
     {
-        //Editer un plat/menu de la BD et le passé dans le body
-        $query = $this->pdo->query("UPDATE items
-        SET
-        itm_name = :itm_name, 
-        itm_description = :itm_name, 
-        itm_price = :itm_price, 
-        itm_image = :itm_image,  
-        itm_qty = :itm_qty, 
-        itm_original_qty = :itm_original,
-        cat_id = :cat_id
-        WHERE id = :id
-        ");
-        return $this->save($query, $entity);
+        $this->validityCheck($item);
+
+        $name = $item->getName();
+        $description = $item->getDescription();
+        $price = $item->getPrice();
+        $image = $item->getImage();
+        $quantity = $item->getQuantity();
+        $originalQuantity = $item->getOriginalQuantity();
+        $categoryId = $item->getCategoryId();
+
+        $query = $this->pdo->query(
+            "UPDATE item
+            SET
+            itm_name = $name, 
+            itm_description = $description, 
+            itm_price = $price, 
+            itm_image = $image,  
+            itm_qty = $quantity, 
+            itm_original_qty = $originalQuantity,
+            cat_id = $categoryId
+            WHERE
+            id = $id"
+        );
+
+        return $this->save($query);
     }
 }

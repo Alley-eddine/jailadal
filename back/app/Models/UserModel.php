@@ -2,37 +2,43 @@
 
 namespace Models;
 
-use Models\DefaultModel;
 use Entities\User;
+use Models\EntityModel;
 
-class UserModel extends DefaultModel
+class UserModel extends EntityModel
 {
     protected $table = "user";
 
-    public function createUser(array $entity)
+    public function createUser(User $user)
     {
-        $uuid = $this->newUuid();
-    
-        $query = "INSERT INTO user
-        (id, usr_lastname, usr_firstname, usr_mail, usr_phone, usr_password, usr_picture_url, usr_privilege)
-        VALUES ($uuid, :id, :usr_lastname, :usr_firstname, :usr_mail, :usr_phone, usr_password, usr_picture_url, usr_privilege)
-        ";
+        $this->validityCheck($user);
 
-        return $this->save($query, $entity);
+        $uuid = $this->newUuid();
+        $query = $this->pdo->prepare(
+            "INSERT INTO user
+            (
+                id
+            )
+            VALUES
+            (
+                $uuid,
+            )"
+        );
+
+        return $this->save($query);
     }
 
-    public function editUser(array $entity)
+    public function modifyUser(User $user, string $id)
     {
-        $query = "UPDATE user
-        SET
-        usr_lastname = :usr_lastname,
-        usr_fisrtname = :usr_fisrtname,
-        usr_mail = :usr_mail,
-        usr_phone = :usr_phone,
-        usr_password = :usr_password,
-        usr_picture_url = :usr_picture_url,
-        usr_privilege = :usr_privilege
-        WHERE id = :id";
-        return $this->save($query, $entity);
+        $this->validityCheck($user);
+
+        $query = $this->pdo->query(
+            "UPDATE user
+            SET
+            WHERE
+            id = $id"
+        );
+
+        return $this->save($query);
     }
 }

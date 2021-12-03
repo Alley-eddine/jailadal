@@ -2,30 +2,43 @@
 
 namespace Models;
 
-use Models\DefaultModel;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
+use Entities\Category;
+use Models\EntityModel;
 
-class CategoryModel extends DefaultModel
+class CategoryModel extends EntityModel
 {
     protected $table = "category";
-    public function editOrderStatus(array $entity)
+
+    public function createCategory(Category $category)
     {
-        $query = $this->pdo->query("UPDATE order
-        SET
-        odr_status = :odr_status,
-        odr_rating = :odr_rating
-        WHERE id = :id
-        ");
-        return $this->save($query, $entity);
+        $this->validityCheck($category);
+
+        $uuid = $this->newUuid();
+        $query = $this->pdo->prepare(
+            "INSERT INTO category
+            (
+                id
+            )
+            VALUES
+            (
+                $uuid,
+            )"
+        );
+
+        return $this->save($query);
     }
 
-    public function createCategory(array $entity)
+    public function modifyCategory(Category $category, string $id)
     {
-        $uuid = $this->newUuid();
-        if (!empty($entity)) {
-            $query = $this->pdo->prepare("INSERT INTO categories (id, cat_name) VALUES ($uuid, :cat_name)");
-            return $this->save($query, $entity);
-        }
+        $this->validityCheck($category);
+
+        $query = $this->pdo->query(
+            "UPDATE category
+            SET
+            WHERE
+            id = $id"
+        );
+
+        return $this->save($query);
     }
 }

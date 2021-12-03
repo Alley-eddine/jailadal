@@ -2,48 +2,57 @@
 
 namespace Services;
 
+use Models\TableModel;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Services\EntityService;
 
-class TableService
+class TableService extends EntityService
 {
+    public function getTables(Response $response): Response
+    {
+        $model = new TableModel;
+        $tables = $model->getAll();
+
+        return $this->jsonResponse($tables, $response)
+            ->withStatus(200);
+    }
+
+    public function getTable(Response $response, string $id): Response
+    {
+        $model = new TableModel;
+        $tables = $model->get($id);
+
+        return $this->jsonResponse($tables, $response)
+            ->withStatus(200);
+    }
+
     public function createTable(Request $request, Response $response): Response
     {
-        // TODO: Implémentation de la logique
-        $response->getBody()->write("<span>POST Table</span>");
-        return $response;
-    }
-    
-    public function getAllTables(Request $request, Response $response): Response
-    {
-        // TODO:
-        // Instancier un TableModel.
-        // Appeler la méthode appropriée à la construction de TableModel dans sa liste de méthodes.
-        // Formater l"TableModel en JSON.
-        // Ajouter le JSON au body de $response.
+        $model = new TableModel;
+        $table = $request->getParsedBody();
+        $model->createTable($table);
 
-        $response->getBody()->write("<span>GET All Tables</span>");
-        return $response;
+        return $response
+            ->withStatus(201);
     }
-    
-    public function getTable(Request $request, Response $response, string $id): Response
+
+    public function modifyTable(Request $request, Response $response, string $id): Response
     {
-        // TODO: Implémentation de la logique
-        $response->getBody()->write("<span>GET Table $id</span>");
-        return $response;
+        $model = new TableModel;
+        $table = $request->getParsedBody();
+        $model->modifyTable($table, $id);
+
+        return $response
+            ->withStatus(204);
     }
-    
-    public function editTable(Request $request, Response $response, string $id): Response
-    {
-        // TODO: Implémentation de la logique
-        $response->getBody()->write("<span>PUT Table $id</span>");
-        return $response;
-    }
-    
+
     public function deleteTable(Request $request, Response $response, string $id): Response
     {
-        // TODO: Implémentation de la logique
-        $response->getBody()->write("<span>DELETE Table $id</span>");
-        return $response;
+        $model = new TableModel;
+        $model->delete($id);
+
+        return $response
+            ->withStatus(204);
     }
 }

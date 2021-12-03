@@ -2,22 +2,43 @@
 
 namespace Models;
 
+use Entities\Cart;
+use Models\EntityModel;
 
-use Models\DefaultModel;
-
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
-
-class CartModel extends DefaultModel
+class CartModel extends EntityModel
 {
     protected $table = "cart";
 
-    public function createCart(array $entity)
+    public function createCart(Cart $cart)
     {
+        $this->validityCheck($cart);
+
         $uuid = $this->newUuid();
-        if (!empty($entity)) {
-            $query = $this->pdo->prepare("INSERT INTO cart (id, usr_id) VALUES ($uuid, :usr_id)");
-            return $this->save($query, $entity);
-        }
+        $query = $this->pdo->prepare(
+            "INSERT INTO cart
+            (
+                id
+            )
+            VALUES
+            (
+                $uuid,
+            )"
+        );
+
+        return $this->save($query);
+    }
+
+    public function modifyCart(Cart $cart, string $id)
+    {
+        $this->validityCheck($cart);
+
+        $query = $this->pdo->query(
+            "UPDATE cart
+            SET
+            WHERE
+            id = $id"
+        );
+
+        return $this->save($query);
     }
 }

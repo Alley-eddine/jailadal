@@ -2,37 +2,52 @@
 
 namespace Models;
 
-use Models\DefaultModel;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
+use Entities\Table;
+use Models\EntityModel;
 
-class TableModel extends DefaultModel
+class TableModel extends EntityModel
 {
     protected $table = "table";
 
-    public function createTable(array $entity)
+    public function createTable(Table $table)
     {
+        $this->validityCheck($table);
+
         $uuid = $this->newUuid();
+        $query = $this->pdo->prepare(
+            "INSERT INTO table
+            (
+                id
+            )
+            VALUES
+            (
+                $uuid,
+            )"
+        );
 
-        $query = $this->pdo->query("INSERT INTO table
-        (id,
-        tbl_availability,
-        usr_id)
-        VALUES
-        ($uuid,
-        :tbl_availability,
-        :usr_id)");
-        return $this->save($query, $entity);
-
+        return $this->save($query);
     }
 
-    public function editTable(array $entity)
+    public function modifyTable(Table $table, string $id)
     {
+<<<<<<< Updated upstream
         $query = $this->pdo->query("UPDATE table
         SET
         tbl_availability = :tbl_availability,
         usr_id = :usr_id, 
         WHERE id = :id");
         return $this->save($query, $entity);
+=======
+        $this->validityCheck($table);
+
+        $query = $this->pdo->query(
+            "UPDATE table
+            SET
+            WHERE
+            id = $id"
+        );
+
+        return $this->save($query);
+>>>>>>> Stashed changes
     }
 }

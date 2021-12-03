@@ -2,86 +2,76 @@
 
 namespace Entities;
 
-Class Item{
-    private string $id;
-    private string $name;
-    private string $description;
-    private float $price;
-    private string $image;
-    private int $quantity;
-    private int $originalQuantity;
-    private String $categoryId;
-
-    public function getId(): string
-    {
-        return $this->id;
-    }
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
+class Item extends Entity
+{
+    private string $itm_name;
+    private string $itm_description;
+    private float $itm_price;
+    private string $itm_image;
+    private int $itm_qty;
+    private int $itm_original_qty;
+    private string $cat_id;
 
     public function getName(): string
     {
-        return $this->name;
+        return $this->itm_name;
     }
     public function setName($name): void
     {
-        $this->name = $name;
+        $this->itm_name = $name;
     }
 
     public function getDescription(): string
     {
-        return $this->description;
+        return $this->itm_description;
     }
-    public function setItmDescription($description): void
+    public function setDescription($description): void
     {
-        $this->description = $description;
+        $this->itm_description = $description;
     }
 
     public function getPrice(): float
     {
-        return $this->price;
+        return $this->itm_price;
     }
     public function setPrice($price): void
     {
-        $this->price = $price;
+        $this->itm_price = $price;
     }
 
     public function getImage(): string
     {
-        return $this->image;
+        return $this->itm_image;
     }
     public function setImage($image): void
     {
-        $this->image = $image;
+        $this->itm_image = $image;
     }
 
     public function getQuantity(): int
     {
-        return $this->quantity;
+        return $this->itm_qty;
     }
     public function setQuantity($quantity): void
     {
-        $this->quantity = $quantity;
+        $this->itm_qty = $quantity;
     }
 
     public function getOriginalQuantity(): int
     {
-        return $this->originalQuantity;
+        return $this->itm_original_qty;
     }
     public function setOriginalQuantity($originalQuantity): void
     {
-        $this->originalQuantity = $originalQuantity;
+        $this->itm_original_qty = $originalQuantity;
     }
 
-    public function getCategory(): string
+    public function getCategoryId(): string
     {
-        return $this->category;
+        return $this->cat_id;
     }
-    public function setCategory(string $categoryId): void
+    public function setCategoryId(string $categoryId): void
     {
-        $this->categoryId = $categoryId;
+        $this->cat_id = $categoryId;
     }
-    
 }

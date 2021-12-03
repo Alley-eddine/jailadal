@@ -2,48 +2,57 @@
 
 namespace Services;
 
+use Models\ItemModel;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Services\EntityService;
 
-class ItemService
+class ItemService extends EntityService
 {
+    public function getItems(Response $response): Response
+    {
+        $model = new ItemModel;
+        $items = $model->getAll();
+
+        return $this->jsonResponse($items, $response)
+            ->withStatus(200);
+    }
+
+    public function getItem(Response $response, string $id): Response
+    {
+        $model = new ItemModel;
+        $items = $model->get($id);
+
+        return $this->jsonResponse($items, $response)
+            ->withStatus(200);
+    }
+
     public function createItem(Request $request, Response $response): Response
     {
-        // TODO: Implémentation de la logique
-        $response->getBody()->write("<span>POST Item</span>");
-        return $response;
-    }
-    
-    public function getItems(Request $request, Response $response): Response
-    {
-        // TODO:
-        // Instancier un ItemModel.
-        // Appeler la méthode appropriée à la construction de ItemModel dans sa liste de méthodes.
-        // Formater l"ItemModel en JSON.
-        // Ajouter le JSON au body de $response.
+        $model = new ItemModel;
+        $item = $request->getParsedBody();
+        $model->createItem($item);
 
-        $response->getBody()->write("<span>GET All Items</span>");
-        return $response;
+        return $response
+            ->withStatus(201);
     }
-    
-    public function getItem(Request $request, Response $response, string $id): Response
-    {
-        // TODO: Implémentation de la logique
-        $response->getBody()->write("<span>GET Item $id</span>");
-        return $response;
-    }
-    
+
     public function modifyItem(Request $request, Response $response, string $id): Response
     {
-        // TODO: Implémentation de la logique
-        $response->getBody()->write("<span>PUT Item $id</span>");
-        return $response;
+        $model = new ItemModel;
+        $item = $request->getParsedBody();
+        $model->modifyItem($item, $id);
+
+        return $response
+            ->withStatus(204);
     }
-    
+
     public function deleteItem(Request $request, Response $response, string $id): Response
     {
-        // TODO: Implémentation de la logique
-        $response->getBody()->write("<span>DELETE Item $id</span>");
-        return $response;
+        $model = new ItemModel;
+        $model->delete($id);
+
+        return $response
+            ->withStatus(204);
     }
 }
