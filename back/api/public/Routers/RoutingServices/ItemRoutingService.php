@@ -27,14 +27,14 @@ class ItemRoutingService
 
     private function getAll(Group $group)
     {
-        $group->get('', function (Response $response): Response {
+        $group->get('', function (Request $request, Response $response): Response {
             return $this->service->getItems($response);
         });
     }
 
     private function get(Group $group)
     {
-        $group->get('/{id}', function (Response $response, string $id): Response {
+        $group->get('/{id}', function (Request $request, Response $response, string $id): Response {
             return $this->service->getItem($response, $id);
         });
     }
