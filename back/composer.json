@@ -6,7 +6,6 @@
             "Common\\": "api/public/Common/",
             "Config\\": "api/public/Config/",
             "Entities\\": "app/Entities/",
-            "Middlewares\\": "api/public/Middlewares/",
             "Models\\": "app/Models/",
             "Services\\": "app/Services/",
             "Routers\\": "api/public/Routers/",

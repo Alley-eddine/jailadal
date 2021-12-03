@@ -17,7 +17,7 @@ class CategoryModel extends EntityModel
         $name = $category->getName();
 
         $query = $this->pdo->prepare(
-            "INSERT INTO categories
+            "INSERT INTO category
             (
                 id,
                 cat_name
@@ -38,7 +38,7 @@ class CategoryModel extends EntityModel
         $name = $category->getName();
 
         $query = $this->pdo->query(
-            "UPDATE categories
+            "UPDATE category
             SET
             cat_name = $name 
             WHERE

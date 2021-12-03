@@ -73,7 +73,7 @@ VALUES
   );
 
 INSERT INTO
-  `categories` (`id`, `cat_name`)
+  `category` (`id`, `cat_name`)
 VALUES
   ('19c39348-9d47-4738-99fe-b0381872951f', 'Menu'),
   ('c2fdea93-072d-4524-b7e2-923cd14f41b6', 'Entrée'),
@@ -89,7 +89,7 @@ VALUES
 
 
 INSERT INTO
-  `items` (
+  `item` (
     `id`,
     `itm_name`,
     `itm_description`,

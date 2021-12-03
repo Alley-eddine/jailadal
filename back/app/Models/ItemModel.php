@@ -23,7 +23,7 @@ class ItemModel extends EntityModel
         $originalQuantity = $item->getOriginalQuantity();
         $categoryId = $item->getCategoryId();
 
-        $query = $this->pdo->prepare(
+        $query =
             "INSERT INTO item
             (
                 id,
@@ -36,16 +36,15 @@ class ItemModel extends EntityModel
             )
             VALUES
             (
-                $uuid,
-                $name,
-                $description,
+                \"$uuid\",
+                \"$name\",
+                \"$description\",
                 $price,
-                $image,
+                \"$image\",
                 $quantity,
                 $originalQuantity,
-                $categoryId
-            )"
-        );
+                \"$categoryId\"
+            )";
 
         return $this->save($query);
     }
@@ -62,19 +61,18 @@ class ItemModel extends EntityModel
         $originalQuantity = $item->getOriginalQuantity();
         $categoryId = $item->getCategoryId();
 
-        $query = $this->pdo->query(
+        $query =
             "UPDATE item
             SET
-            itm_name = $name, 
-            itm_description = $description, 
+            itm_name = \"$name\", 
+            itm_description = \"$description\", 
             itm_price = $price, 
-            itm_image = $image,  
+            itm_image = \"$image\",  
             itm_qty = $quantity, 
             itm_original_qty = $originalQuantity,
-            cat_id = $categoryId
+            cat_id = \"$categoryId\"
             WHERE
-            id = $id"
-        );
+            id = \"$id\"";
 
         return $this->save($query);
     }

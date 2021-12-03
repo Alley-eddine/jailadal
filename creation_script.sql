@@ -6,18 +6,18 @@ CREATE DATABASE IF NOT EXISTS jailadal CHARACTER SET utf8 COLLATE utf8_general_c
 USE jailadal;
 
 #------------------------------------------------------------
-# Table: Categories
+# Table: Category
 #------------------------------------------------------------
-CREATE TABLE `categories`(
+CREATE TABLE `category`(
         id Varchar (36) NOT NULL,
         cat_name Varchar (100) NOT NULL,
-        CONSTRAINT Categories_PK PRIMARY KEY (id)
+        CONSTRAINT Category_PK PRIMARY KEY (id)
 ) ENGINE = InnoDB;
 
 #------------------------------------------------------------
-# Table: Items
+# Table: Item
 #------------------------------------------------------------
-CREATE TABLE `items`(
+CREATE TABLE `item`(
         id Varchar (36) NOT NULL,
         itm_name Varchar (100) NOT NULL,
         itm_description Varchar (255) NOT NULL,
@@ -26,8 +26,8 @@ CREATE TABLE `items`(
         itm_qty Int NOT NULL,
         itm_original_qty BigInt NOT NULL,
         cat_id Varchar (36) NOT NULL,
-        CONSTRAINT Items_PK PRIMARY KEY (id),
-        CONSTRAINT Items_Categories_FK FOREIGN KEY (cat_id) REFERENCES Categories(id)
+        CONSTRAINT Item_PK PRIMARY KEY (id),
+        CONSTRAINT Item_Category_FK FOREIGN KEY (cat_id) REFERENCES Category(id)
 ) ENGINE = InnoDB;
 
 #------------------------------------------------------------
@@ -89,5 +89,5 @@ CREATE TABLE `contains`(
         itm_id Varchar (36) NOT NULL,
         CONSTRAINT contains_PK PRIMARY KEY (id),
         CONSTRAINT contains_Cart_FK FOREIGN KEY (crt_id) REFERENCES Cart(id),
-        CONSTRAINT contains_Items0_FK FOREIGN KEY (itm_id) REFERENCES Items(id)
+        CONSTRAINT contains_Item0_FK FOREIGN KEY (itm_id) REFERENCES Item(id)
 ) ENGINE = InnoDB;

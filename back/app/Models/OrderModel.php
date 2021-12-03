@@ -50,7 +50,7 @@ class OrderModel extends EntityModel
         $usr_id = $order->getUsrId();
 
         $query = $this->pdo->query(
-            "UPDATE table
+            "UPDATE order 
             SET
             odr_status = $status, 
             odr_date = $date,

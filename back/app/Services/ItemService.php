@@ -2,6 +2,7 @@
 
 namespace Services;
 
+use Entities\Item;
 use Models\ItemModel;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -30,7 +31,7 @@ class ItemService extends EntityService
     public function createItem(Request $request, Response $response): Response
     {
         $model = new ItemModel;
-        $item = $request->getParsedBody();
+        $item = new Item($request->getParsedBody());
         $model->createItem($item);
 
         return $response
@@ -40,7 +41,7 @@ class ItemService extends EntityService
     public function modifyItem(Request $request, Response $response, string $id): Response
     {
         $model = new ItemModel;
-        $item = $request->getParsedBody();
+        $item = new Item($request->getParsedBody());
         $model->modifyItem($item, $id);
 
         return $response

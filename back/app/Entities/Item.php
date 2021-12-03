@@ -12,6 +12,16 @@ class Item extends Entity
     private int $itm_original_qty;
     private string $cat_id;
 
+    public function __construct(array $properties = null)
+    {
+        if ($properties != null)
+        {
+            foreach ($properties as $key => $value) {
+                $this->{$key} = $value;
+            }
+        }
+    }
+
     public function getName(): string
     {
         return $this->itm_name;

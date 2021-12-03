@@ -9,14 +9,14 @@ use PDO;
 
 class EntityModel
 {
-    private Database $db;
-    private $entity;
+    private $class;
+    protected Database $db;
     protected $table;
 
     public function __construct()
     {
         $this->db = new Database;
-        $this->entity = "back\app\Entities\\" . ucfirst($this->table);
+        $this->class = "Entities\\" . ucfirst($this->table);
     }
 
     protected function validityCheck(Entity $entity): void
@@ -43,17 +43,19 @@ class EntityModel
 
     public function getAll()
     {
-        $query = $this->db->getPDO()->query("SELECT * FROM $this->table");
-        $query->setFetchMode(PDO::FETCH_CLASS, $this->entity);
+        $table = $this->table;
+        $query = $this->db->getPDO()->query("SELECT * FROM $table");
+        $query->setFetchMode(PDO::FETCH_CLASS, $this->class);
 
         return $query->fetchAll();
     }
 
     public function get(string $id)
     {
-        $query = $this->db->getPDO()->query("SELECT * FROM $this->table WHERE id=$id");
-        $query->setFetchMode(PDO::FETCH_CLASS, $this->entity);
-
+        $table = $this->table;
+        $query = $this->db->getPDO()->query("SELECT * FROM $table WHERE id=\"$id\"");
+        $query->setFetchMode(PDO::FETCH_CLASS, $this->class);
+        
         return $query->fetch();
     }
 
@@ -66,7 +68,8 @@ class EntityModel
 
     public function delete(string $id): void
     {
-        $query = $this->pdo->query("DELETE FROM $this->table WHERE id = $id");
-        $query->execute($id);
+        $table = $this->table;
+        $query = $this->db->getPDO()->query("DELETE FROM $table WHERE id = \"$id\"");
+        $query->execute();
     }
 }

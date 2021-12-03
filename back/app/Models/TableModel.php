@@ -18,7 +18,7 @@ class TableModel extends EntityModel
         $usr_id = $table->getUsrId();
 
         $query = $this->pdo->prepare(
-            "INSERT INTO table
+            "INSERT INTO `table`
             (
                 id,
                 tbl_availability,
@@ -44,7 +44,7 @@ class TableModel extends EntityModel
         $usr_id = $table->getUsrId();
 
         $query = $this->pdo->query(
-            "UPDATE table
+            "UPDATE `table`
             SET
             tbl_availability = $availability, 
             usr_id = $usr_id, 
