@@ -55,12 +55,4 @@ Class Order{
     {
         $this->usr_id = $usr_id;
     }
-
-    public function __construct($id, $status, $date, $rating)
-    {
-        $this->id = $id;
-        $this->status = $status;
-        $this->date = $date;
-        $this->rating = $rating;
-    }
 }
