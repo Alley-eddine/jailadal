@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import Items from "../items/Items";
+import Button from '@mui/material/Button';
 
 class Table extends React.Component {
     constructor() {
@@ -14,11 +15,11 @@ class Table extends React.Component {
                 },
                 {
                     tbl_id: 2,
-                    tbl_availability: false
+                    tbl_availability: true
                 },
                 {
                     tbl_id: 3,
-                    tbl_availability: false
+                    tbl_availability: true
                 },
                 {
                     tbl_id: 4,
@@ -64,7 +65,7 @@ class Table extends React.Component {
                                 TABLE: {tbl_id} <br/>
                                 DISPONIBLE
 
-                                RESERVEZ
+                                <Button variant="contained">RESERVEZ</Button>
 
                             </div>)}
                         </div>

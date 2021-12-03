@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import logo from '../assets/logo.png'
+import './Header.scss'
 import { Link, Router, Switch } from 'react-router-dom';
 import Login from './login/Login'
 

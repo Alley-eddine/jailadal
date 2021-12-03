@@ -23,7 +23,7 @@ class BestSellers extends React.Component {
                     itm_name: 'Panini',
                     itm_description: 'Pas 2 comme les notres!',
                     itm_price: 127.5,
-                    itm_image: 'https://i.ibb.co/GCCdy8t/womens.png',
+                    itm_image: 'https://www.schaer.com/sites/default/files/styles/header_large/public/2016-07/1062_PaniniRolls_Dandy.webp',
                     itm_qty: 20,
                     itm_original_qty: 30
                 },
@@ -32,7 +32,7 @@ class BestSellers extends React.Component {
                     itm_name: 'Pizza',
                     itm_description: 'La piiza de Italia',
                     itm_price: 187.9,
-                    itm_image: 'https://pixabay.com/get/gb67634a31065ec24c3822296d626ff69e28ef70477351b8dbeaa80ff4b86fc4a6e033645cc8c9e70750458e4b348f2b0.png',
+                    itm_image: 'https://www.delonghi.com/Global/recipes/multifry/pizza_fresca.jpg',
                     itm_qty: 34,
                     itm_original_qty: 35
                 }
