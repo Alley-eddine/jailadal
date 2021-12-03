@@ -11,6 +11,7 @@ function App() {
     return (
         <Router>
             <Switch>
+                <div className="wrapper">
                 <div className="App">
                     <div className="Header">
                         <Header/>
@@ -36,6 +37,7 @@ function App() {
                         <Register />
                     </Route>
 
+                </div>
                 </div>
             </Switch>
         </Router>

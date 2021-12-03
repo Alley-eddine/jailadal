@@ -11,25 +11,17 @@ class BestSellers extends React.Component {
                 {
                     itm_id: 1,
                     itm_name: 'burger',
-                    itm_description: 'Le meilleur burger que vous avez jamais gouté!',
+                    itm_description: 'Cuite au grill!!!',
                     itm_price: 25.3,
-                    itm_image: 'https://i.ibb.co/GCCdy8t/womens.png',
+                    itm_image: 'https://cdn.pixabay.com/photo/2014/12/21/23/56/hamburger-576419_960_720.png',
                     itm_qty: 7,
                     itm_original_qty: 200
                 },
-                {
-                    itm_id: 2,
-                    itm_name: 'caviar',
-                    itm_description: 'Du bon caviar!',
-                    itm_price: 12.5,
-                    itm_image: 'https://i.ibb.co/GCCdy8t/womens.png',
-                    itm_qty: 10,
-                    itm_original_qty: 20
-                },
+                
                 {
                     itm_id: 3,
                     itm_name: 'Panini',
-                    itm_description: 'Panini!',
+                    itm_description: 'Pas 2 comme les notres!',
                     itm_price: 127.5,
                     itm_image: 'https://i.ibb.co/GCCdy8t/womens.png',
                     itm_qty: 20,
@@ -37,10 +29,10 @@ class BestSellers extends React.Component {
                 },
                 {
                     itm_id: 4,
-                    itm_name: 'Baguette',
-                    itm_description: 'La baguette de luxe',
+                    itm_name: 'Pizza',
+                    itm_description: 'La piiza de Italia',
                     itm_price: 187.9,
-                    itm_image: 'https://i.ibb.co/GCCdy8t/womens.png',
+                    itm_image: 'https://pixabay.com/get/gb67634a31065ec24c3822296d626ff69e28ef70477351b8dbeaa80ff4b86fc4a6e033645cc8c9e70750458e4b348f2b0.png',
                     itm_qty: 34,
                     itm_original_qty: 35
                 }
