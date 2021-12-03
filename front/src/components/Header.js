@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import logo from '../assets/logo.png'
-import { Link, Router } from 'react-router-dom';
+import { Link, Router, Switch } from 'react-router-dom';
 import Login from './login/Login'
 
 const pages = ['Products', 'Pricing', 'Blog'];
@@ -96,18 +96,36 @@ const Header = () => {
                         <img src={logo} width={50} height={50} /> JAILADAL
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                        <Button
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            <a href={"/"}>Home</a>
+                        </Button>
                             <Button
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
-                                <a href={"/menu"}>Menu </a>
+                                <a href={"/menu"}>Menu</a>
                             </Button>
                             <Button
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
-                                <a href={"/login"}>Login </a>
+                                <a href={"/login"}>Login</a>
                             </Button>
+                        <Button
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            <a href={"/profile"}>Profile</a>
+                        </Button>
+                        <Button
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            <a href={"/reservez"}>Reservez</a>
+                        </Button>
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>

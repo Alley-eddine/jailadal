@@ -1,8 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
+import Items from "../items/Items";
 
-export default function Tables() {
-
+class Table extends React.Component {
+    constructor() {
+        super();
 
         this.state = {
             tables: [
@@ -35,7 +37,7 @@ export default function Tables() {
                 },
                 {
                     tbl_id: 8,
-                    tbl_availability: false
+                    tbl_availability: true
                 },
                 {
                     tbl_id: 9,
@@ -47,7 +49,10 @@ export default function Tables() {
                 }
             ]
         }
+    }
 
+        render()
+    {
         return (
             <div>
                 {this.state.tables.map(({
@@ -63,9 +68,10 @@ export default function Tables() {
 
                             </div>)}
                         </div>
-                    )
-                )}
+                    ))}
             </div>
         );
-
+    }
 }
+
+export default Table;
