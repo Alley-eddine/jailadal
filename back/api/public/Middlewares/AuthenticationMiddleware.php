@@ -2,25 +2,28 @@
 
 namespace Middlewares;
 
-use Psr\Http\Message\ServerRequestInterface as Request;
+use Exception;
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
+use Slim\Exception\HttpForbiddenException;
 
 class AuthenticationMiddleware
 {
-    public static function authenticate(Request $request, Response $response): Response
+    public function __invoke(Request $request, RequestHandler $handler): Response
     {
+        $response = $handler->handle($request);
+
         // TODO: implement logic
-
         // Test purpose logic
-        $data = $request->getParsedBody();
 
-        $login = $data['login'];
-        $password = $data['password'];
+        $cookie = $request->getHeaderLine('Cookie');
 
-        $response->getBody()->write(
-            "<span>Login:<br>$login</span><br><br>"
-                . "<span>Password:<br>$password</span><br><br>"
-        );
+        if (empty($cookie)) {
+            $e = new HttpForbiddenException($request);
+            var_dump($e);
+            throw $e;
+        }
 
         return $response;
     }

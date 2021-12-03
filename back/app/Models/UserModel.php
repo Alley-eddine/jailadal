@@ -3,6 +3,7 @@
 namespace Models;
 
 use Models\DefaultModel;
+use Entities\User;
 
 class UserModel extends DefaultModel
 {

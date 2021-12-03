@@ -2,10 +2,13 @@
 
 namespace Abstracts;
 
+use Middlewares\AuthenticationMiddleware;
+use Psr\Http\Message\ServerRequestInterface;
 use Slim\App;
 use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;
 use Slim\Handlers\Strategies\RequestResponseArgs;
+use Throwable;
 
 abstract class ServerImplementation
 {
@@ -20,7 +23,7 @@ abstract class ServerImplementation
         $this->app = AppFactory::create();
         $routeCollector = $this->app->getRouteCollector();
         $routeCollector->setDefaultInvocationStrategy(new RequestResponseArgs());
-        
+
         return $this;
     }
 
@@ -34,9 +37,31 @@ abstract class ServerImplementation
 
     protected function baseMiddleware(): self
     {
+        // Add Routing Middleware
         $this->app->addRoutingMiddleware();
         $this->app->addBodyParsingMiddleware();
-        $this->app->addErrorMiddleware(true, true, true);
+        
+        // Define Custom Error Handler
+        $app = $this->app;
+        $customErrorHandler = function (
+            Throwable $exception,
+        ) use ($app) {
+            $payload = ['error' => $exception->getMessage()];
+            
+            $response = $app->getResponseFactory()->createResponse();
+            $response->getBody()->write(
+                json_encode($payload, JSON_UNESCAPED_UNICODE)
+            );
+
+            var_dump($response);
+            return $response;
+        };
+        
+        // Add Error Middleware
+        $errorMiddleware = $this->app->addErrorMiddleware(true, true, true);
+        $errorMiddleware->setDefaultErrorHandler($customErrorHandler);
+
+        $this->app->add(new AuthenticationMiddleware());
 
         return $this;
     }

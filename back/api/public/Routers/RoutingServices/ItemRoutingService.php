@@ -2,6 +2,7 @@
 
 namespace Routers\RoutingServices;
 
+use Middlewares\AuthenticationMiddleware;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Services\ItemService;
@@ -18,11 +19,16 @@ class ItemRoutingService
 
     public function httpMethodsItemService(Group $group): void
     {
-        $this->post($group);
         $this->getAll($group);
         $this->get($group);
-        $this->put($group);
-        $this->delete($group);
+
+        $group->group('', function (Group $itemAuthenticationGroup): void
+        {
+            $this->post($itemAuthenticationGroup);
+            $this->put($itemAuthenticationGroup);
+            $this->delete($itemAuthenticationGroup);
+        });
+
     }
 
     private function post(Group $group)
