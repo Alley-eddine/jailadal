@@ -7,7 +7,6 @@ const BestSellersMenu = ({itm_name, itm_image, itm_description, itm_price, itm_q
     }} className='menu-item'>
         <div >
             <h1 className={'title'}>{itm_name.toUpperCase()}</h1>
-            <p>{itm_price}</p>
         </div>
     </div>
 

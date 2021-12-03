@@ -1,13 +1,19 @@
 .common-items {
-  max-width: 30%;
+  max-width: 50%;
   flex: 1 1 auto;
   display: flex;
+  flex-wrap: nowrap;
   overflow: hidden;
   background-position: center;
   background-size: cover;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 
   & .background-image {
     transform: scale(1.1);
     transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
   }
 }
+
